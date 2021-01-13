@@ -6,6 +6,17 @@
 		android:layout_height="match_parent"
 		tools:context=".ui.home.HomeFragment">
 
+	<androidx.appcompat.widget.Toolbar
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/colorAccent"
+			android:minHeight="?attr/actionBarSize"
+			app:layout_constraintStart_toStartOf="parent"
+			app:title="Home"
+			app:titleMarginStart="24dp"
+			app:titleTextColor="@color/white"
+			tools:ignore="MissingConstraints" />
+
 	<RelativeLayout
 			android:layout_width="match_parent"
 			android:layout_height="match_parent">
@@ -35,10 +46,11 @@
 					android:layout_height="wrap_content">
 
 				<TextView
-						android:layout_width="fill_parent"
+						android:layout_width="wrap_content"
 						android:layout_height="match_parent"
 						android:padding="32dp"
-						android:text="8933424"
+						android:layout_gravity="center"
+						android:text="8934"
 						android:textColor="@color/white"
 						android:textSize="26dp" />
 
@@ -66,9 +78,10 @@
 
 				<TextView
 						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
+						android:layout_height="wrap_content"
 						android:padding="32dp"
 						android:text="Rs.1000"
+						android:layout_gravity="center"
 						android:textColor="@color/white"
 						android:textSize="26dp" />
 
@@ -95,9 +108,10 @@
 					android:layout_height="wrap_content">
 
 				<TextView
-						android:layout_width="fill_parent"
-						android:layout_height="match_parent"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
 						android:padding="32dp"
+						android:layout_gravity="center"
 						android:text="0 "
 						android:textColor="@color/white"
 						android:textSize="32dp" />
@@ -126,8 +140,9 @@
 					android:layout_height="wrap_content">
 
 				<TextView
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
 						android:padding="32dp"
 						android:text="40"
 						android:layout_centerInParent="true"
