@@ -4,7 +4,8 @@
 		android:layout_height="match_parent"
 		tools:context=".ui.profile.ProfileFragment"
 		xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:tools="http://schemas.android.com/tools">
+		xmlns:tools="http://schemas.android.com/tools"
+		xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<RelativeLayout
 			android:id="@+id/profile_card_section"
@@ -49,89 +50,102 @@
 				android:textColor="@color/white"
 				android:layout_centerHorizontal="true"/>
 	</RelativeLayout>
-	<RelativeLayout
+	<LinearLayout
 			android:id="@+id/contact_rel_layout"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:orientation="horizontal"
 			android:layout_below="@id/profile_card_section"
 			android:foreground="?android:attr/selectableItemBackground"
 			android:clickable="true">
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="contact us"
+				android:text="Total Points:- "
 				android:textAllCaps="true"
+				android:layout_margin="25dp"
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"
-				android:layout_centerInParent="true"
 				android:textStyle="bold"/>
-		<ImageView
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				android:layout_margin="10dp"/>
-	</RelativeLayout>
-	<RelativeLayout
-			android:id="@+id/privacy_rel_layout"
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="25dp"
+			    android:text="100"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="@color/colorAccent"/>
+	</LinearLayout>
+	<LinearLayout
+			android:id="@+id/trips"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
+			android:orientation="horizontal"
 			android:layout_below="@id/contact_rel_layout"
 			android:foreground="?android:attr/selectableItemBackground"
 			android:clickable="true">
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="user privacy"
+				android:text="Total Trips: -"
 				android:textAllCaps="true"
+				android:layout_margin="25dp"
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"
-				android:layout_centerInParent="true"
 				android:textStyle="bold"/>
-		<ImageView
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				android:layout_margin="10dp"/>
-	</RelativeLayout>
-	<RelativeLayout
-			android:id="@+id/aboutUs_rel_layout"
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="25dp"
+				android:text="100"
+				android:textStyle="bold"
+				android:textSize="20sp"
+				android:textColor="@color/colorAccent"/>
+	</LinearLayout>
+	<LinearLayout
+			android:id="@+id/about"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_below="@id/privacy_rel_layout"
+			android:orientation="horizontal"
+			android:layout_below="@id/trips"
 			android:foreground="?android:attr/selectableItemBackground"
 			android:clickable="true">
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="about us"
+				android:text="Total Earnings: -"
 				android:textAllCaps="true"
+				android:layout_margin="25dp"
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"
-				android:layout_centerInParent="true"
 				android:textStyle="bold"/>
-		<ImageView
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				android:layout_margin="10dp"/>
-	</RelativeLayout>
-	<RelativeLayout
-			android:id="@+id/logout_rel_layout"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/aboutUs_rel_layout"
-			android:foreground="?android:attr/selectableItemBackground"
-			android:clickable="true">
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="logout"
-				android:textAllCaps="true"
+				android:layout_marginTop="25dp"
+				android:text="100"
+				android:textStyle="bold"
 				android:textSize="20sp"
-				android:textColor="@color/colorAccent"
-				android:layout_centerInParent="true"
-				android:textStyle="bold"/>
-		<ImageView
-				android:layout_width="50dp"
-				android:layout_height="50dp"
-				android:layout_margin="10dp"/>
-	</RelativeLayout>
+				android:textColor="@color/colorAccent"/>
+	</LinearLayout>
+
+	<androidx.cardview.widget.CardView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+		android:backgroundTint="@color/colorAccent"
+			android:layout_margin="20sp"
+			app:cardCornerRadius="20dp"
+		android:layout_alignParentBottom="true">
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+			android:text=" Logout"
+				android:textColor="@color/white"
+				android:layout_gravity="center"
+				android:textSize="20sp"
+				android:textStyle="bold"
+				android:padding="12dp"/>
+	</androidx.cardview.widget.CardView>
 
 </RelativeLayout>
