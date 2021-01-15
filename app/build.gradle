@@ -5,6 +5,13 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    android {
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
+
     defaultConfig {
         applicationId "com.barbera.barberaserviceapp"
         minSdkVersion 23
@@ -31,9 +38,13 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.firebase:firebase-auth:20.0.1'
-    implementation 'com.google.firebase:firebase-firestore:21.5.0'
+    implementation 'com.google.firebase:firebase-firestore:22.0.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.8.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
+    implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
 
 }
