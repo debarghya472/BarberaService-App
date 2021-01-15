@@ -2,9 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		xmlns:app="http://schemas.android.com/apk/res-auto">
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
 
 	<androidx.appcompat.widget.Toolbar
+			android:id="@+id/tool"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:minHeight="?attr/actionBarSize"
@@ -12,5 +14,13 @@
 			app:titleTextColor="@color/white"
 			app:titleMarginStart="24dp"
 			app:title="Bookings"/>
+
+	<androidx.recyclerview.widget.RecyclerView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+		android:layout_below="@+id/tool"
+		tools:listitem="@layout/booking_item"/>
+
+
 
 </RelativeLayout>
