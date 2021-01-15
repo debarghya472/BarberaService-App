@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
     private  TextView trips;
     private CardView logout;
     private  CardView login;
-    private String profilename=null;
+    private String profilename="";
 
     @Nullable
     @Override
@@ -56,17 +56,16 @@ public class ProfileFragment extends Fragment {
 
     private void displayProfile() {
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
-            login.setVisibility(View.VISIBLE
-
-            );
+            login.setVisibility(View.VISIBLE);
             Toast.makeText(getContext(),"User Not Logged In",Toast.LENGTH_SHORT).show();
-        }else if(profilename==null){
+        }else if(profilename==""){
             FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if(task.isSuccessful()){
-                        name.setText(task.getResult().get("name").toString());
+                        profilename = task.getResult().get("name").toString();
+                        name.setText(profilename);
                         email.setText(task.getResult().get("email").toString());
                         phone.setText(task.getResult().get("phone").toString());
                         earnings.setText(task.getResult().get("earnings").toString());
@@ -100,6 +99,7 @@ public class ProfileFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                profilename="";
                 final AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                 builder.setMessage("Logout From This Device??");
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
@@ -118,6 +118,7 @@ public class ProfileFragment extends Fragment {
                 });
                 AlertDialog dialog=builder.create();
                 dialog.show();
+
             }
         });
 
