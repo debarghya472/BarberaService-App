@@ -45,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        }
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

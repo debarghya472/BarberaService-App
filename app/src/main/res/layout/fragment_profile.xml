@@ -22,6 +22,7 @@
 		<TextView
 				android:id="@+id/NameInProfile"
 				android:layout_width="wrap_content"
+				android:visibility="invisible"
 				android:layout_height="wrap_content"
 				android:layout_centerHorizontal="true"
 				android:text="Krishna Balram"
@@ -33,6 +34,7 @@
 				android:id="@+id/EmailInProfile"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:visibility="invisible"
 				android:text="radhakrishnabalram@gmail.com"
 				android:textSize="15sp"
 				android:textColor="@color/white"
@@ -45,6 +47,7 @@
 				android:layout_height="wrap_content"
 				android:text="+916378791396"
 				android:textSize="15sp"
+				android:visibility="invisible"
 				android:layout_marginTop="5dp"
 				android:layout_below="@id/EmailInProfile"
 				android:textColor="@color/white"
@@ -74,6 +77,7 @@
 				android:layout_marginTop="25dp"
 			    android:text="100"
 				android:textStyle="bold"
+				android:visibility="invisible"
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"/>
 	</LinearLayout>
@@ -101,6 +105,7 @@
 				android:layout_marginTop="25dp"
 				android:text="100"
 				android:textStyle="bold"
+				android:visibility="invisible"
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"/>
 	</LinearLayout>
@@ -127,13 +132,16 @@
 				android:layout_height="wrap_content"
 				android:layout_marginTop="25dp"
 				android:text="100"
+				android:visibility="invisible"
 				android:textStyle="bold"
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"/>
 	</LinearLayout>
 
 	<androidx.cardview.widget.CardView
+			android:id="@+id/logout"
 			android:layout_width="match_parent"
+			android:visibility="invisible"
 			android:layout_height="wrap_content"
 		android:backgroundTint="@color/colorAccent"
 			android:layout_margin="20sp"
@@ -144,6 +152,27 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 			android:text=" Logout"
+				android:textColor="@color/white"
+				android:layout_gravity="center"
+				android:textSize="20sp"
+				android:textStyle="bold"
+				android:padding="12dp"/>
+	</androidx.cardview.widget.CardView>
+
+	<androidx.cardview.widget.CardView
+			android:id="@+id/login"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:visibility="invisible"
+			android:backgroundTint="@color/colorAccent"
+			android:layout_margin="20sp"
+			app:cardCornerRadius="20dp"
+			android:layout_alignParentBottom="true">
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="LogIn"
 				android:textColor="@color/white"
 				android:layout_gravity="center"
 				android:textSize="20sp"
