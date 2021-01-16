@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.barbera.barberaserviceapp.R;
+import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
 import com.google.gson.internal.$Gson$Preconditions;
 
 import org.w3c.dom.Text;
@@ -61,6 +62,11 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             notifyDataSetChanged();
         });
 
+        holder.start.setOnClickListener(v -> {
+            Intent intent = new Intent(context,ServiceActivity.class);
+            intent.putExtra("kwy","123");
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -74,6 +80,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         private TextView amount;
         private ImageView direction;
         private Button cancel;
+        private Button start;
         public BookingItemHolder(@NonNull View itemView) {
             super(itemView);
             address = itemView.findViewById(R.id.add);
@@ -81,6 +88,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             amount = itemView.findViewById(R.id.amt);
             direction = itemView.findViewById(R.id.direction);
             cancel = itemView.findViewById(R.id.cancel_button);
+            start  = itemView.findViewById(R.id.start_btn);
         }
     }
 }
