@@ -61,7 +61,7 @@ public class BookingFragment extends Fragment {
         retrofit = RetrofitClientInstance.getRetrofitInstance();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         final ProgressDialog progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage("Logging You In...");
+        progressDialog.setMessage("Fetching Today's Bookings");
         progressDialog.show();
         progressDialog.setCancelable(false);
         Call<BookingList> call =jsonPlaceHolderApi.getBookings();

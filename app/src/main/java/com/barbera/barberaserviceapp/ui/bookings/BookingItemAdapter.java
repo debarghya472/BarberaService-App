@@ -40,7 +40,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
 
         holder.address.setText("Address: "+bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
-        holder.amount.setText(bookingItem.getService());
+        holder.amount.setText(bookingItem.getAmount());
 
     }
 
