@@ -1,12 +1,12 @@
 package com.barbera.barberaserviceapp.ui.bookings;
 
 import android.app.ProgressDialog;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,21 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
-import com.barbera.barberaserviceapp.ui.login.LoginActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.barbera.barberaserviceapp.MainActivity.itemList;
+
 public class BookingFragment extends Fragment {
 
     private Button start;
     private Retrofit retrofit;
-    private List<BookingItem> itemList;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView recyclerView;
 
@@ -43,10 +44,16 @@ public class BookingFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_bookings,container,false);
 
         start =(Button)view.findViewById(R.id.btn_start_day);
-        itemList = new ArrayList<BookingItem>();
+
         recyclerView = view.findViewById(R.id.recycler_booking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
+
+        if(itemList.size() != 0 ){
+//            Toast.makeText(getContext(),"List in not empty",Toast.LENGTH_SHORT).show();
+            attach_adapter();
+            start.setVisibility(View.INVISIBLE);
+        }
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +88,7 @@ public class BookingFragment extends Fragment {
                         itemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                 bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus()));
                     }
+                    start.setVisibility(View.INVISIBLE);
                     progressDialog.dismiss();
                     attach_adapter();
                 }
@@ -101,4 +109,5 @@ public class BookingFragment extends Fragment {
         BookingItemAdapter adapter = new BookingItemAdapter(itemList,getActivity());
         recyclerView.setAdapter(adapter);
     }
+    
 }

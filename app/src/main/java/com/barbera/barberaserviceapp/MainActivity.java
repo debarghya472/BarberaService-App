@@ -8,16 +8,23 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.barbera.barberaserviceapp.ui.bookings.BookingFragment;
+import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
 import com.barbera.barberaserviceapp.ui.home.HomeFragment;
 import com.barbera.barberaserviceapp.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static List<BookingItem> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        itemList =new ArrayList<BookingItem>();
 
         Fragment fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
