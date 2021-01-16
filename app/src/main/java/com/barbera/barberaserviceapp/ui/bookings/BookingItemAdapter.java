@@ -47,7 +47,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
 
-        holder.address.setText("Address: "+bookingItem.getAddress());
+        holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
         holder.direction.setOnClickListener(v -> {
