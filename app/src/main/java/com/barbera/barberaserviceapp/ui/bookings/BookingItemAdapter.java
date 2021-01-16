@@ -1,9 +1,15 @@
 package com.barbera.barberaserviceapp.ui.bookings;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,12 +20,14 @@ import com.google.gson.internal.$Gson$Preconditions;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.List;
 
 public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.BookingItemHolder> {
 
     private List<BookingItem> bookingItemList;
     private  Context context;
+    private Address address;
 
 
     public BookingItemAdapter(List<BookingItem> booking, Context context){
@@ -34,6 +42,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         return new BookingItemHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
@@ -41,6 +50,11 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         holder.address.setText("Address: "+bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
+        holder.direction.setOnClickListener(v -> {
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
+            context.startActivity(intent);
+        });
 
     }
 
@@ -53,11 +67,13 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         private TextView address;
         private TextView service;
         private TextView amount;
+        private ImageView direction;
         public BookingItemHolder(@NonNull View itemView) {
             super(itemView);
             address = itemView.findViewById(R.id.add);
             service = itemView.findViewById(R.id.service);
             amount = itemView.findViewById(R.id.amt);
+            direction = itemView.findViewById(R.id.direction);
         }
     }
 }
