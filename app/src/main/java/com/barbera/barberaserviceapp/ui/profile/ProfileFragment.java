@@ -65,7 +65,7 @@ public class ProfileFragment extends Fragment {
             Toast.makeText(getContext(),"User Not Logged In",Toast.LENGTH_SHORT).show();
         }else if(sharedPreferences.getString("profilename","") == ""){
             final ProgressDialog progressDialog=new ProgressDialog(getContext());
-            progressDialog.setMessage("Fetching Details");
+            progressDialog.setMessage("Fetching Details...");
             progressDialog.show();
             progressDialog.setCancelable(false);
             FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -95,10 +95,10 @@ public class ProfileFragment extends Fragment {
                         points.setVisibility(View.VISIBLE);
                         trips.setVisibility(View.VISIBLE);
                         logout.setVisibility(View.VISIBLE);
+                        progressDialog.dismiss();
                     }
                 }
             });
-            progressDialog.dismiss();
         }else {
             name.setVisibility(View.VISIBLE);
             email.setVisibility(View.VISIBLE);
