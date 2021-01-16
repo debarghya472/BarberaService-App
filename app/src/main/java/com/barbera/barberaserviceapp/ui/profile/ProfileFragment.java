@@ -98,6 +98,7 @@ public class ProfileFragment extends Fragment {
                     }
                 }
             });
+            progressDialog.dismiss();
         }else {
             name.setVisibility(View.VISIBLE);
             email.setVisibility(View.VISIBLE);
