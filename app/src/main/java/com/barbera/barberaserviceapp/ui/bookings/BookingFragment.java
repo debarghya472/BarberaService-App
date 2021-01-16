@@ -11,10 +11,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.barbera.barberaserviceapp.R;
+import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
+import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
+
+import retrofit2.Retrofit;
 
 public class BookingFragment extends Fragment {
 
     private Button start;
+    private Retrofit retrofit;
+    private JsonPlaceHolderApi jsonPlaceHolderApi;
 
 
     @Nullable
@@ -27,9 +33,15 @@ public class BookingFragment extends Fragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                getBookingList();
             }
         });
         return view;
+    }
+
+    private void getBookingList() {
+        retrofit = RetrofitClientInstance.getRetrofitInstance();
+        jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+
     }
 }
