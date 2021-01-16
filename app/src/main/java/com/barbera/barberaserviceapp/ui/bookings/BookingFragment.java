@@ -36,6 +36,7 @@ public class BookingFragment extends Fragment {
     private Retrofit retrofit;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView recyclerView;
+    private BookingItemAdapter adapter;
 
 
     @Nullable
@@ -85,6 +86,7 @@ public class BookingFragment extends Fragment {
                     Toast.makeText(getContext(),"Cannot find any bookings",Toast.LENGTH_SHORT).show();
                 }else{
                     for(BookingItem bookingItem: bookingList){
+                        if(bookingItem.getStatus() == 0)
                         itemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                 bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus()));
                     }
@@ -106,8 +108,7 @@ public class BookingFragment extends Fragment {
     }
 
     private void attach_adapter() {
-        BookingItemAdapter adapter = new BookingItemAdapter(itemList,getActivity());
+        adapter = new BookingItemAdapter(itemList,getActivity());
         recyclerView.setAdapter(adapter);
     }
-    
 }

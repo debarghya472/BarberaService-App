@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,6 +56,10 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
                     Uri.parse("google.navigation:q="+bookingItem.getAddress()));
             context.startActivity(intent);
         });
+        holder.cancel.setOnClickListener(v -> {
+            bookingItemList.remove(position);
+            notifyDataSetChanged();
+        });
 
     }
 
@@ -68,12 +73,14 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         private TextView service;
         private TextView amount;
         private ImageView direction;
+        private Button cancel;
         public BookingItemHolder(@NonNull View itemView) {
             super(itemView);
             address = itemView.findViewById(R.id.add);
             service = itemView.findViewById(R.id.service);
             amount = itemView.findViewById(R.id.amt);
             direction = itemView.findViewById(R.id.direction);
+            cancel = itemView.findViewById(R.id.cancel_button);
         }
     }
 }
