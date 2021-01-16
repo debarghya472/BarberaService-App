@@ -41,6 +41,7 @@
 					android:textColor="@color/colorAccent"
 					android:textSize="16dp"/>
 			<TextView
+					android:id="@+id/service"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="Service names"
@@ -61,6 +62,7 @@
 					android:textColor="@color/colorAccent"
 					android:textSize="16dp"/>
 			<TextView
+					android:id="@+id/amt"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:text="Rs.150"

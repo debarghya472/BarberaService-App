@@ -6,7 +6,7 @@ import java.util.List;
 
 public class BookingList {
 
-    @SerializedName("User")
+    @SerializedName("user")
     private List<BookingItem> bookingItemList;
 
     public BookingList(List<BookingItem> bookingItemList) {

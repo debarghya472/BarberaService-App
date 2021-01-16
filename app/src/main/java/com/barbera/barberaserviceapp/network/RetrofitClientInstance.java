@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClientInstance {
 
     private static Retrofit retrofit;
-    private static final String BASE_URL = "http://10.0.2.2:4000/api/";
+    private static final String BASE_URL = "https://script.google.com/macros/s/AKfycbyxGjz51Ml7UlbRijCBf_GVn2iY4fi729hAubqebSKZXchZgBwCwKIhpQ/";
 
     public static Retrofit getRetrofitInstance() {
         Gson gson = new GsonBuilder().serializeNulls().create();
