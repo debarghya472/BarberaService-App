@@ -27,7 +27,7 @@ public class BookingItem extends RealmObject {
     private int status;
 
     public BookingItem(){
-        
+
     }
 
     public BookingItem(String name, String service, Date date, String time, String address, String amount, String assignee, int status) {
