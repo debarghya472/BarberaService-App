@@ -64,7 +64,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
 
         holder.start.setOnClickListener(v -> {
             Intent intent = new Intent(context,ServiceActivity.class);
-            intent.putExtra("kwy","123");
+            intent.putExtra("amount",bookingItem.getAmount());
             context.startActivity(intent);
         });
     }

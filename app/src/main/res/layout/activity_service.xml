@@ -6,14 +6,87 @@
 		android:layout_height="match_parent"
 		tools:context=".ui.service.ServiceActivity">
 
-	<TextView
+	<EditText
+			android:id="@+id/editText"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Service Yet to be implemented"
-			android:textSize="20dp"
+			android:layout_marginTop="32dp"
+			android:hint="Enter Starting OTP"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+	<androidx.cardview.widget.CardView
+			android:id="@+id/otp1"
+			android:visibility="invisible"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="16dp"
+			android:clickable="true"
+			app:cardBackgroundColor="#020507"
+			app:cardCornerRadius="40dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/editText1">
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="58dp"
+				android:foreground="?android:attr/selectableItemBackground">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:text="Verify OTP"
+					android:textColor="@color/white"
+					android:textSize="20sp"
+					android:textStyle="bold" />
+		</RelativeLayout>
+	</androidx.cardview.widget.CardView>
+
+	<EditText
+			android:id="@+id/editText1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:hint="Enter End OTP"
+			android:visibility="invisible"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
+
+	<androidx.cardview.widget.CardView
+			android:id="@+id/otp"
+			android:layout_width="match_parent"
+			android:layout_height="60dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginTop="100dp"
+			android:layout_marginEnd="16dp"
+			android:clickable="true"
+			app:cardBackgroundColor="#020507"
+			app:cardCornerRadius="40dp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="58dp"
+				android:foreground="?android:attr/selectableItemBackground">
+
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_centerInParent="true"
+					android:text="Verify OTP"
+					android:textColor="@color/white"
+					android:textSize="20sp"
+					android:textStyle="bold" />
+		</RelativeLayout>
+	</androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

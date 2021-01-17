@@ -73,7 +73,7 @@ public class BookingFragment extends Fragment {
         final ProgressDialog progressDialog=new ProgressDialog(getContext());
         progressDialog.setMessage("Fetching Today's Bookings");
         progressDialog.show();
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
         Call<BookingList> call =jsonPlaceHolderApi.getBookings();
         call.enqueue(new Callback<BookingList>() {
             @Override
