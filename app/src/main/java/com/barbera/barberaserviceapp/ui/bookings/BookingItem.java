@@ -5,7 +5,10 @@ import com.google.gson.annotations.SerializedName;
 import java.sql.Time;
 import java.util.Date;
 
-public class BookingItem {
+import io.realm.Realm;
+import io.realm.RealmObject;
+
+public class BookingItem extends RealmObject {
     @SerializedName("name")
     private String name;
     @SerializedName("service")
@@ -22,6 +25,10 @@ public class BookingItem {
     private String assignee;
     @SerializedName("status")
     private int status;
+
+    public BookingItem(){
+        
+    }
 
     public BookingItem(String name, String service, Date date, String time, String address, String amount, String assignee, int status) {
         this.name = name;

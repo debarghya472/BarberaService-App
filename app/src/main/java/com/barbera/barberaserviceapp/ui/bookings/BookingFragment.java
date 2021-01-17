@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import io.realm.Realm;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,6 +54,7 @@ public class BookingFragment extends Fragment {
         if(itemList.size() != 0 ){
 //            Toast.makeText(getContext(),"List in not empty",Toast.LENGTH_SHORT).show();
             attach_adapter();
+            addToLocalDb();
             start.setVisibility(View.INVISIBLE);
         }
 
@@ -93,6 +95,7 @@ public class BookingFragment extends Fragment {
                     start.setVisibility(View.INVISIBLE);
                     progressDialog.dismiss();
                     attach_adapter();
+                    addToLocalDb();
                 }
                 
             }
@@ -110,5 +113,11 @@ public class BookingFragment extends Fragment {
     private void attach_adapter() {
         adapter = new BookingItemAdapter(itemList,getActivity());
         recyclerView.setAdapter(adapter);
+    }
+    private void addToLocalDb() {
+        Realm realm =Realm.getDefaultInstance();
+        realm.beginTransaction();
+        realm.insert(itemList);
+        realm.commitTransaction();
     }
 }
