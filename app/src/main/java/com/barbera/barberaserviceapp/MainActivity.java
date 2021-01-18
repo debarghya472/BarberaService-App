@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import com.barbera.barberaserviceapp.ui.bookings.BookingFragment;
 import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
 import com.barbera.barberaserviceapp.ui.home.HomeFragment;
+import com.barbera.barberaserviceapp.ui.mybookings.MyBookingFragment;
 import com.barbera.barberaserviceapp.ui.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -47,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.profile:
                     selectedFragment = new ProfileFragment();
                     break;
+                case R.id.nav_mybookings:
+                    selectedFragment = new MyBookingFragment();
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
             return true;
