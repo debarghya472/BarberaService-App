@@ -52,11 +52,11 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
-        holder.direction.setOnClickListener(v -> {
-            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
-            context.startActivity(intent);
-        });
+//        holder.direction.setOnClickListener(v -> {
+//            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+//                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
+//            context.startActivity(intent);
+//        });
         holder.cancel.setOnClickListener(v -> {
             bookingItemList.remove(position);
             notifyDataSetChanged();
@@ -78,7 +78,6 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         private TextView address;
         private TextView service;
         private TextView amount;
-        private ImageView direction;
         private Button cancel;
         private Button start;
         public BookingItemHolder(@NonNull View itemView) {
@@ -86,7 +85,6 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             address = itemView.findViewById(R.id.add);
             service = itemView.findViewById(R.id.service);
             amount = itemView.findViewById(R.id.amt);
-            direction = itemView.findViewById(R.id.direction);
             cancel = itemView.findViewById(R.id.cancel_button);
             start  = itemView.findViewById(R.id.start_btn);
         }
