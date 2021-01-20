@@ -25,12 +25,14 @@ public class BookingItem extends RealmObject {
     private String assignee;
     @SerializedName("status")
     private int status;
+    @SerializedName("contact")
+    private String contact;
 
     public BookingItem(){
 
     }
 
-    public BookingItem(String name, String service, Date date, String time, String address, String amount, String assignee, int status) {
+    public BookingItem(String name, String service, Date date, String time, String address, String amount, String assignee, int status,String contact) {
         this.name = name;
         this.service = service;
         this.date = date;
@@ -39,6 +41,7 @@ public class BookingItem extends RealmObject {
         this.amount = amount;
         this.assignee = assignee;
         this.status = status;
+        this.contact = contact;
     }
 
     public String getName() {
@@ -72,6 +75,8 @@ public class BookingItem extends RealmObject {
     public int getStatus() {
         return status;
     }
+
+    public  String getContact(){ return contact;}
 
     public void setStatus(int status) {
         this.status = status;

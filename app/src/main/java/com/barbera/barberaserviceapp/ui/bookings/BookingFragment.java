@@ -67,7 +67,7 @@ public class BookingFragment extends Fragment {
         if(itemList.size() != 0 ){
 //            Toast.makeText(getContext(),"List in not empty",Toast.LENGTH_SHORT).show();
             attach_adapter();
-            addToLocalDb();
+//            addToLocalDb();
             accept.setVisibility(View.INVISIBLE);
         }
 
@@ -98,12 +98,12 @@ public class BookingFragment extends Fragment {
                     for(BookingItem bookingItem: bookingList){
                         if(bookingItem.getStatus() == 0)
                         itemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
-                                bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus()));
+                                bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus(),bookingItem.getContact()));
                     }
                     accept.setVisibility(View.INVISIBLE);
                     progressDialog.dismiss();
                     attach_adapter();
-                    addToLocalDb();
+//                    addToLocalDb();
                 }
                 
             }

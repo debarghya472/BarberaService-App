@@ -45,6 +45,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         holder.address.setText(bookingItem.getAddress());
         holder.name.setText(bookingItem.getName());
         holder.time.setText(bookingItem.getTime());
+        holder.contact.setText(bookingItem.getContact());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
 

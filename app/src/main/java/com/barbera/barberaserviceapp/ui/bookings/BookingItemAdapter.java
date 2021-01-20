@@ -52,6 +52,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
+        holder.time.setText(bookingItem.getTime());
 //        holder.direction.setOnClickListener(v -> {
 //            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 //                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
@@ -78,6 +79,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         private TextView address;
         private TextView service;
         private TextView amount;
+        private TextView time;
         private Button cancel;
         private Button start;
         public BookingItemHolder(@NonNull View itemView) {
@@ -86,6 +88,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             service = itemView.findViewById(R.id.service);
             amount = itemView.findViewById(R.id.amt);
             cancel = itemView.findViewById(R.id.cancel_button);
+            time = itemView.findViewById(R.id.Time1);
             start  = itemView.findViewById(R.id.accept_btn);
         }
     }
