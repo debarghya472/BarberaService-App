@@ -4,13 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
-import android.location.Geocoder;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,18 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
-import com.google.gson.internal.$Gson$Preconditions;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
 import java.util.List;
 
 public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.BookingItemHolder> {
 
     private List<BookingItem> bookingItemList;
     private  Context context;
-    private Address address;
 
 
     public BookingItemAdapter(List<BookingItem> booking, Context context){
@@ -75,7 +67,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         return bookingItemList.size();
     }
 
-    public class BookingItemHolder extends RecyclerView.ViewHolder {
+    public static class BookingItemHolder extends RecyclerView.ViewHolder {
         private TextView address;
         private TextView service;
         private TextView amount;

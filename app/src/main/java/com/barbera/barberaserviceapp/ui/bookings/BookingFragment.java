@@ -48,6 +48,7 @@ public class BookingFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new BookingItemAdapter(itemList,getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -82,6 +83,10 @@ public class BookingFragment extends Fragment {
         progressDialog.setMessage("Fetching Today's Bookings");
         progressDialog.show();
         progressDialog.setCancelable(true);
+        if(itemList!=null){
+            itemList.clear();
+            adapter.notifyDataSetChanged();
+        }
         Call<BookingList> call =jsonPlaceHolderApi.getBookings();
         call.enqueue(new Callback<BookingList>() {
             @Override
@@ -126,15 +131,13 @@ public class BookingFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.refresh: getBookingList();
-            break;
+        if (item.getItemId() == R.id.refresh) {
+            getBookingList();
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void attach_adapter() {
-        adapter = new BookingItemAdapter(itemList,getActivity());
         recyclerView.setAdapter(adapter);
     }
     private void addToLocalDb() {

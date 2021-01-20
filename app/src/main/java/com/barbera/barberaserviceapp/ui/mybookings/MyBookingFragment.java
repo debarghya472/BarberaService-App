@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -42,10 +43,12 @@ public class MyBookingFragment extends Fragment {
     private Toolbar toolbar;
     private Retrofit retrofit;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private MyBookingsAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        adapter = new MyBookingsAdapter(myBookingItemList,getActivity());
         setHasOptionsMenu(true);
     }
 
@@ -73,9 +76,13 @@ public class MyBookingFragment extends Fragment {
         retrofit = RetrofitClientInstance.getRetrofitInstance();
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         final ProgressDialog progressDialog=new ProgressDialog(getContext());
-        progressDialog.setMessage("Fetching Today's Bookings");
+        progressDialog.setMessage("Fetching Your Today's Bookings");
         progressDialog.show();
         progressDialog.setCancelable(true);
+        if(myBookingItemList!= null){
+            myBookingItemList.clear();
+            adapter.notifyDataSetChanged();
+        }
         Call<BookingList> call =jsonPlaceHolderApi.getBookings();
         call.enqueue(new Callback<BookingList>() {
             @Override
@@ -93,6 +100,7 @@ public class MyBookingFragment extends Fragment {
                                     bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus(),bookingItem.getContact()));
                         }
                     }
+                    attachadapter();
                     progressDialog.dismiss();
                 }
 
@@ -101,7 +109,7 @@ public class MyBookingFragment extends Fragment {
 
             @Override
             public void onFailure(@NotNull Call<BookingList> call, @NotNull Throwable t) {
-
+                Toast.makeText(getContext(),"Cannot find any bookings",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -113,7 +121,15 @@ public class MyBookingFragment extends Fragment {
         inflater.inflate(R.menu.refresh_menu,menu);
     }
 
-    private void attachadapter() {
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.refresh) {
+            getMyBookings();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    private void attachadapter() {
+        recyclerView.setAdapter(adapter);
     }
 }
