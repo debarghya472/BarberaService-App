@@ -11,7 +11,7 @@
 			android:layout_height="match_parent">
 
 		<androidx.appcompat.widget.Toolbar
-				android:id="@+id/tool"
+				android:id="@+id/tool1"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:background="@color/colorAccent"
@@ -24,7 +24,7 @@
 				android:id="@+id/recycler_mybooking"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_below="@+id/tool"
+				android:layout_below="@+id/tool1"
 				tools:listitem="@layout/mybooking_item"/>
 
 	</RelativeLayout>

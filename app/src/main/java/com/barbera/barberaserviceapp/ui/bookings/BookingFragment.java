@@ -10,9 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
-
+import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,9 +40,15 @@ public class BookingFragment extends Fragment {
     private Retrofit retrofit;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView recyclerView;
+    private Toolbar toolbar;
 
     private BookingItemAdapter adapter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -49,6 +56,8 @@ public class BookingFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_bookings,container,false);
 
         accept =(Button)view.findViewById(R.id.btn_start_day);
+        toolbar= view.findViewById(R.id.tool);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         recyclerView = view.findViewById(R.id.recycler_booking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
