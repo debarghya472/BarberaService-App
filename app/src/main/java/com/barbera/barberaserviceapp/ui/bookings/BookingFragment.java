@@ -4,6 +4,8 @@ import android.app.ProgressDialog;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,10 +35,11 @@ import static com.barbera.barberaserviceapp.MainActivity.itemList;
 
 public class BookingFragment extends Fragment {
 
-    private Button start;
+    private Button accept;
     private Retrofit retrofit;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView recyclerView;
+
     private BookingItemAdapter adapter;
 
 
@@ -45,7 +48,7 @@ public class BookingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_bookings,container,false);
 
-        start =(Button)view.findViewById(R.id.btn_start_day);
+        accept =(Button)view.findViewById(R.id.btn_start_day);
 
         recyclerView = view.findViewById(R.id.recycler_booking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -55,15 +58,10 @@ public class BookingFragment extends Fragment {
 //            Toast.makeText(getContext(),"List in not empty",Toast.LENGTH_SHORT).show();
             attach_adapter();
             addToLocalDb();
-            start.setVisibility(View.INVISIBLE);
+            accept.setVisibility(View.INVISIBLE);
         }
 
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getBookingList();
-            }
-        });
+        accept.setOnClickListener(v -> getBookingList());
         return view;
     }
 
@@ -92,7 +90,7 @@ public class BookingFragment extends Fragment {
                         itemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                 bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus()));
                     }
-                    start.setVisibility(View.INVISIBLE);
+                    accept.setVisibility(View.INVISIBLE);
                     progressDialog.dismiss();
                     attach_adapter();
                     addToLocalDb();
@@ -108,6 +106,12 @@ public class BookingFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.refresh_menu,menu);
     }
 
     private void attach_adapter() {

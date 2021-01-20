@@ -86,7 +86,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             service = itemView.findViewById(R.id.service);
             amount = itemView.findViewById(R.id.amt);
             cancel = itemView.findViewById(R.id.cancel_button);
-            start  = itemView.findViewById(R.id.start_btn);
+            start  = itemView.findViewById(R.id.accept_btn);
         }
     }
 }

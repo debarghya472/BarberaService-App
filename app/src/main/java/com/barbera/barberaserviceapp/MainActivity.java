@@ -20,12 +20,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static List<BookingItem> itemList;
+    public static  List<BookingItem> myBookingItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         itemList =new ArrayList<BookingItem>();
+        myBookingItemList = new ArrayList<BookingItem>();
 
         Fragment fragment = new HomeFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, fragment).commit();
