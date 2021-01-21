@@ -9,20 +9,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
-import com.barbera.barberaserviceapp.ui.bookings.BookingItemAdapter;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
-
-import org.w3c.dom.Text;
-
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -49,15 +42,15 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
     public void onBindViewHolder(@NonNull MyBookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
 
-        String time =convertTime(bookingItem.getTime());
+//        String time =convertTime(bookingItem.getTime());
 
         holder.address.setText(bookingItem.getAddress());
         holder.name.setText(bookingItem.getName());
-        holder.time.setText(time.substring(time.lastIndexOf("1899")+4));
+        holder.time.setText(bookingItem.getTime());
         holder.contact.setText(bookingItem.getContact());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
-        Date date = bookingItem.getDate();
+//        Date date = bookingItem.getDate();
 
         holder.direction.setOnClickListener(v -> {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,

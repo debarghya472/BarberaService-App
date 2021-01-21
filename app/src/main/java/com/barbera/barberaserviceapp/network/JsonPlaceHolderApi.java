@@ -8,13 +8,14 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface JsonPlaceHolderApi {
 
     @GET("exec")
     Call<BookingList> getBookings();
 
-    @POST("exec?name={name}&service={service}&time={time}&address={address}&amount={amount}&assignedTo=debarghya&action=update&id={id}&status=1&date={date}&contact={contact}")
-    Call<BookingList> updateAssignee(@Path("name")String name, @Path("service")String service, @Path("time")String Time, @Path("addredd") String address
-    , @Path("amount")String amount, @Path("id")int id, @Path("date")Date date,@Path("contact")String contact);
+    @POST("exec")
+    Call<BookingList> updateAssignee(@Query("name") String name, @Query("service")String service, @Query("time")String Time, @Query("address") String address
+    , @Query("amount")String amount,@Query("assignedTo") String assignee,@Query("action")String action,@Query("status")int status,@Query("id")int id, @Query("date")String date, @Query("contact")String contact);
 }

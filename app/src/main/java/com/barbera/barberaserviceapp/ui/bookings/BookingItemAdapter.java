@@ -1,6 +1,7 @@
 package com.barbera.barberaserviceapp.ui.bookings;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -26,6 +27,8 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.BookingItemHolder> {
@@ -50,11 +53,11 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
-        String time =convertTime(bookingItem.getTime());
+//        String time =convertTime(bookingItem.getTime());
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
-        holder.time.setText(time.substring(time.lastIndexOf("1899")+4));
+        holder.time.setText(bookingItem.getTime());
 //        holder.direction.setOnClickListener(v -> {
 //            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 //                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
@@ -68,15 +71,37 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         holder.start.setOnClickListener(v -> {
             bookingItemList.remove(position);
             notifyDataSetChanged();
-            updateAssigneeInDb();
+            updateAssigneeInDb(bookingItem.getName(),bookingItem.getService(),bookingItem.getTime(),bookingItem.getAddress(),bookingItem.getAmount(),
+                    bookingItem.getId(),bookingItem.getDate(),bookingItem.getContact());
         });
     }
 
-    private void updateAssigneeInDb() {
+    private void updateAssigneeInDb(String name, String service, String time, String address, String amount, int id,String date, String contact) {
         Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
-        Toast.makeText(context," ",Toast.LENGTH_SHORT).show();
-//        Call<BookingList> call = jsonPlaceHolderApi.updateAssignee();
+        final ProgressDialog progressDialog=new ProgressDialog(context);
+        progressDialog.setMessage("Adding Booking!!");
+        progressDialog.show();
+        progressDialog.setCancelable(true);
+        Call<BookingList> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",1,id,date,contact);
+        call.enqueue(new Callback<BookingList>() {
+            @Override
+            public void onResponse(Call<BookingList> call, Response<BookingList> response) {
+                if(response.code() == 200){
+                    Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context,"Something is wrong",Toast.LENGTH_SHORT).show();
+                }
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<BookingList> call, Throwable t) {
+//                Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
     }
 
     @Override
