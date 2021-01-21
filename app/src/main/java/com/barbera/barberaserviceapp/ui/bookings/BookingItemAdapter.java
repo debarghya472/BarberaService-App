@@ -53,7 +53,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
-//        String time =convertTime(bookingItem.getTime());
+        String time =convertTime(bookingItem.getTime());
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
@@ -144,7 +144,8 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             start  = itemView.findViewById(R.id.accept_btn);
         }
     }
-    private String convertTime(Date date) {
+    private String convertTime(String time) {
+        Date date = new Date(time);
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE,MMMM d,yyyy h:mm,a", Locale.ENGLISH);
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
         String formattedDate = sdf.format(date);
