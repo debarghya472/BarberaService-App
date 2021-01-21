@@ -37,7 +37,6 @@ import static com.barbera.barberaserviceapp.MainActivity.itemList;
 
 public class BookingFragment extends Fragment {
 
-    private Button accept;
     private Retrofit retrofit;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
     private RecyclerView recyclerView;
@@ -57,7 +56,6 @@ public class BookingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_bookings,container,false);
 
-        accept =(Button)view.findViewById(R.id.btn_start_day);
         toolbar= view.findViewById(R.id.tool);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
@@ -66,13 +64,11 @@ public class BookingFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
 
         if(itemList.size() != 0 ){
-//            Toast.makeText(getContext(),"List in not empty",Toast.LENGTH_SHORT).show();
             attach_adapter();
-//            addToLocalDb();
-            accept.setVisibility(View.INVISIBLE);
+        }else {
+            getBookingList();
         }
 
-        accept.setOnClickListener(v -> getBookingList());
         return view;
     }
 
@@ -93,19 +89,20 @@ public class BookingFragment extends Fragment {
             public void onResponse(Call<BookingList> call, Response<BookingList> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(getContext(),"Cannot find Bookings",Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                     return;
                 }
                 List<BookingItem> bookingList = response.body().getBookingItemList();
                 
                 if(bookingList == null){
                     Toast.makeText(getContext(),"Cannot find any bookings",Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else{
                     for(BookingItem bookingItem: bookingList){
                         if(bookingItem.getStatus() == 0)
                         itemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                 bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus(),bookingItem.getContact()));
                     }
-                    accept.setVisibility(View.INVISIBLE);
                     progressDialog.dismiss();
                     attach_adapter();
 //                    addToLocalDb();
