@@ -16,7 +16,7 @@ public class BookingItem extends RealmObject {
     @SerializedName("date")
     private Date date;
     @SerializedName("time")
-    private String time;
+    private Date time;
     @SerializedName("address")
     private  String address;
     @SerializedName("amount")
@@ -32,7 +32,7 @@ public class BookingItem extends RealmObject {
 
     }
 
-    public BookingItem(String name, String service, Date date, String time, String address, String amount, String assignee, int status,String contact) {
+    public BookingItem(String name, String service, Date date, Date time, String address, String amount, String assignee, int status,String contact) {
         this.name = name;
         this.service = service;
         this.date = date;
@@ -56,7 +56,7 @@ public class BookingItem extends RealmObject {
         return date;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 

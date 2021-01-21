@@ -16,7 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.BookingItemHolder> {
 
@@ -40,11 +44,11 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
-
+        String time =convertTime(bookingItem.getTime());
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
-        holder.time.setText(bookingItem.getTime());
+        holder.time.setText(time.substring(time.lastIndexOf("1899")+4));
 //        holder.direction.setOnClickListener(v -> {
 //            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 //                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
@@ -83,5 +87,11 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             time = itemView.findViewById(R.id.Time1);
             start  = itemView.findViewById(R.id.accept_btn);
         }
+    }
+    private String convertTime(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE,MMMM d,yyyy h:mm,a", Locale.ENGLISH);
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+        String formattedDate = sdf.format(date);
+        return  formattedDate;
     }
 }

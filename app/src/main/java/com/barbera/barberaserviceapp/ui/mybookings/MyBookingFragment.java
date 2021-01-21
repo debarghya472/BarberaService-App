@@ -50,6 +50,7 @@ public class MyBookingFragment extends Fragment {
         super.onCreate(savedInstanceState);
         adapter = new MyBookingsAdapter(myBookingItemList,getActivity());
         setHasOptionsMenu(true);
+        String format ="dd-M-yyyy hh:mm:ss a";
     }
 
     @Override
