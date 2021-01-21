@@ -100,7 +100,7 @@ public class BookingFragment extends Fragment {
                 }else{
                     for(BookingItem bookingItem: bookingList){
                         if(bookingItem.getStatus() == 0)
-                        itemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
+                        itemList.add(new BookingItem(bookingItem.getId(),bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                 bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus(),bookingItem.getContact()));
                     }
                     progressDialog.dismiss();

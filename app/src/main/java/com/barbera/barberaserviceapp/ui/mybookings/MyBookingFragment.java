@@ -97,7 +97,7 @@ public class MyBookingFragment extends Fragment {
                 }else{
                     for(BookingItem bookingItem: bookingLists){
                         if(bookingItem.getStatus() == 1 && bookingItem.getAssignee().equals("debarghya")){
-                            myBookingItemList.add(new BookingItem(bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
+                            myBookingItemList.add(new BookingItem(bookingItem.getId(),bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                     bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus(),bookingItem.getContact()));
                         }
                     }

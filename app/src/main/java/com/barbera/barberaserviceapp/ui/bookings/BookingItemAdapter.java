@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.barbera.barberaserviceapp.R;
+import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
+import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +24,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.BookingItemHolder> {
 
@@ -60,10 +66,17 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
 //        });
 
         holder.start.setOnClickListener(v -> {
-            Intent intent = new Intent(context,ServiceActivity.class);
-            intent.putExtra("amount",bookingItem.getAmount());
-            context.startActivity(intent);
+            bookingItemList.remove(position);
+            notifyDataSetChanged();
+            updateAssigneeInDb();
         });
+    }
+
+    private void updateAssigneeInDb() {
+        Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        Toast.makeText(context," ",Toast.LENGTH_SHORT).show();
+//        Call<BookingList> call = jsonPlaceHolderApi.updateAssignee();
     }
 
     @Override
