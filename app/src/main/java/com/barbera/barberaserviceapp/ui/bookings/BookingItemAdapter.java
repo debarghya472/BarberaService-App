@@ -83,10 +83,28 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         progressDialog.setMessage("Adding Booking!!");
         progressDialog.show();
         progressDialog.setCancelable(true);
-        Call<BookingList> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",1,id,date,contact);
-        call.enqueue(new Callback<BookingList>() {
+        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",1,id,date,contact);
+//        call.enqueue(new Callback<BookingList>() {
+//            @Override
+//            public void onResponse(Call<BookingList> call, Response<BookingList> response) {
+//                if(response.code() == 200){
+//                    Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(context,"Something is wrong",Toast.LENGTH_SHORT).show();
+//                }
+//                progressDialog.dismiss();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<BookingList> call, Throwable t) {
+////                Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
+//                progressDialog.dismiss();
+//            }
+//        });
+        call.enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call<BookingList> call, Response<BookingList> response) {
+            public void onResponse(Call<String> call, Response<String> response) {
                 if(response.code() == 200){
                     Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
                 }else {
@@ -96,7 +114,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             }
 
             @Override
-            public void onFailure(Call<BookingList> call, Throwable t) {
+            public void onFailure(Call<String> call, Throwable t) {
 //                Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
                 Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
