@@ -1,5 +1,6 @@
 package com.barbera.barberaserviceapp.ui.mybookings;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -9,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.barbera.barberaserviceapp.R;
+import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
+import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
 import java.text.SimpleDateFormat;
@@ -21,6 +25,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.MyBookingItemHolder> {
     private List<BookingItem> bookingItemList;
@@ -64,6 +73,41 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             context.startActivity(intent);
         });
 
+        holder.cancel.setOnClickListener(v -> {
+            bookingItemList.remove(position);
+            notifyDataSetChanged();
+            updateAssigneeInDb(bookingItem.getName(),bookingItem.getService(),bookingItem.getTime(),bookingItem.getAddress(),bookingItem.getAmount(),
+                    bookingItem.getId(),bookingItem.getDate(),bookingItem.getContact());
+        });
+
+    }
+
+    private void updateAssigneeInDb(String name, String service, String time, String address, String amount, int id, String date, String contact) {
+        Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        final ProgressDialog progressDialog=new ProgressDialog(context);
+        progressDialog.setMessage("Cancelling Booking!!");
+        progressDialog.show();
+        progressDialog.setCancelable(true);
+        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",0,id,date,contact);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.code() == 200){
+                    Toast.makeText(context,"Added booking",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context,"Something is wrong",Toast.LENGTH_SHORT).show();
+                }
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Cancelled booking",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
     }
 
     private String convertTime(Date date) {
@@ -88,6 +132,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         private TextView service;
         private TextView amount;
         private Button start;
+        private Button cancel;
 
 
         public MyBookingItemHolder(@NonNull View itemView) {
@@ -101,6 +146,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             service =itemView.findViewById(R.id.serviceadd);
             amount = itemView.findViewById(R.id.amt123);
             start =itemView.findViewById(R.id.start);
+            cancel = itemView.findViewById(R.id.cancel_button);
         }
     }
 }
