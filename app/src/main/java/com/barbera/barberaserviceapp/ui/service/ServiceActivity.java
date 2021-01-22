@@ -4,13 +4,22 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
+import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
+import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ServiceActivity extends AppCompatActivity {
 
@@ -18,7 +27,16 @@ public class ServiceActivity extends AppCompatActivity {
     private EditText endotp;
     private CardView startOtpBtn;
     private  CardView endOtpBtn;
+    private String name;
+    private String service;
+    private String time;
+    private String address;
     private String amount;
+    private int id;
+    private String date;
+    private String contact;
+
+
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -34,7 +52,14 @@ public class ServiceActivity extends AppCompatActivity {
         startOtpBtn = findViewById(R.id.otp);
         endOtpBtn = findViewById(R.id.otp1);
 
+        name= getIntent().getExtras().getString("name");
+        service = getIntent().getExtras().getString("service");
+        time = getIntent().getExtras().getString("time");
+        address = getIntent().getExtras().getString("address");
         amount = getIntent().getExtras().getString("amount");
+        id= getIntent().getExtras().getInt("id");
+        date =getIntent().getExtras().getString("date");
+        contact = getIntent().getExtras().getString("contact");
 
         startOtpBtn.setOnClickListener(v -> {
             startOtpBtn.setEnabled(false);
@@ -74,13 +99,37 @@ public class ServiceActivity extends AppCompatActivity {
             editor.putInt("payment",pay+amt);
             editor.putInt("trips",trip+1);
             editor.commit();
+            updateInDb(name,service,time,address,amount,id,date,contact);
             dialog.dismiss();
-            finish();
         });
         builder.setNegativeButton("Not Paid", (dialog, which) -> dialog.dismiss());
 
         AlertDialog dialog = builder.create();
         dialog.show();
 
+    }
+    private void updateInDb(String name, String service, String time, String address, String amount, int id, String date, String contact) {
+        Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
+        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        final ProgressDialog progressDialog=new ProgressDialog(getApplicationContext());
+        progressDialog.setMessage("Cancelling Booking!!");
+        progressDialog.show();
+        progressDialog.setCancelable(true);
+        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",2,id,date,contact);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                }
+                Toast.makeText(getApplicationContext(),"NOt Success",Toast.LENGTH_SHORT).show();
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"N Success",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

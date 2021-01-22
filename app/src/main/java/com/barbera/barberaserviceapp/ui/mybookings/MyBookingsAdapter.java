@@ -69,7 +69,14 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
         holder.start.setOnClickListener(v -> {
             Intent intent = new Intent(context, ServiceActivity.class);
+            intent.putExtra("name",bookingItem.getName());
+            intent.putExtra("service",bookingItem.getService());
+            intent.putExtra("time",bookingItem.getTime());
+            intent.putExtra("address",bookingItem.getAddress());
             intent.putExtra("amount",bookingItem.getAmount());
+            intent.putExtra("id",bookingItem.getId());
+            intent.putExtra("date",bookingItem.getDate());
+            intent.putExtra("contact",bookingItem.getContact());
             context.startActivity(intent);
         });
 
