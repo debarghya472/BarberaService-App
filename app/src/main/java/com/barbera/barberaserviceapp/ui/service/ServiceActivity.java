@@ -38,6 +38,7 @@ public class ServiceActivity extends AppCompatActivity {
     private String date;
     private String contact;
     private TextView timer;
+    private String ch[];
     private CountDownTimer countDownTimer;
 
     private SharedPreferences sharedPreferences;
@@ -68,6 +69,8 @@ public class ServiceActivity extends AppCompatActivity {
         date =getIntent().getExtras().getString("date");
         contact = getIntent().getExtras().getString("contact");
 
+        ch = service.split(" ");
+
         startOtpBtn.setOnClickListener(v -> {
             startOtpBtn.setEnabled(false);
             String opt1= startotp.getText().toString();
@@ -75,7 +78,7 @@ public class ServiceActivity extends AppCompatActivity {
                 startotp.setVisibility(View.INVISIBLE);
                 startOtpBtn.setVisibility(View.INVISIBLE);
                 timer.setVisibility(View.VISIBLE);
-                startTimer();
+                calculateTime();
             }
         });
         
@@ -91,9 +94,18 @@ public class ServiceActivity extends AppCompatActivity {
 
 
     }
-    private void startTimer() {
 
-        countDownTimer =  new CountDownTimer(30000,1000) {
+    private void calculateTime() {
+        int timeInMin= 0;
+        for(int i =0;i<ch.length;i++){
+            timeInMin = timeInMin+sharedPreferences1.getInt(ch[i],0);
+        }
+        startTimer(timeInMin);
+    }
+
+    private void startTimer(int timeInMin) {
+        int time = timeInMin*60*1000;
+        countDownTimer =  new CountDownTimer(time,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) millisUntilFinished/60000;
@@ -167,5 +179,77 @@ public class ServiceActivity extends AppCompatActivity {
     private void assignServiceTimer() {
         sharedPreferences1 = getSharedPreferences("Timer",MODE_PRIVATE);
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
+        editor1.putInt("1",30);
+        editor1.putInt("2",40);
+        editor1.putInt("3",30);
+        editor1.putInt("4",60);
+        editor1.putInt("5",20);
+        editor1.putInt("6",20);
+        editor1.putInt("7",20);
+        editor1.putInt("8",20);
+        editor1.putInt("9",40);
+        editor1.putInt("10",40);
+        editor1.putInt("11",40);
+        editor1.putInt("12",40);
+        editor1.putInt("13",40);
+        editor1.putInt("14",60);
+        editor1.putInt("15",80);
+        editor1.putInt("16",50);
+        editor1.putInt("17",50);
+        editor1.putInt("18",30);
+        editor1.putInt("19",20);
+        editor1.putInt("20",45);
+        editor1.putInt("21",30);
+        editor1.putInt("22",30);
+        editor1.putInt("23",20);
+        editor1.putInt("24",25);
+        editor1.putInt("25",25);
+        editor1.putInt("26",80);
+        editor1.putInt("27",50);
+        editor1.putInt("28",60);
+        editor1.putInt("29",30);
+        editor1.putInt("30",40);
+        editor1.putInt("31",30);
+        editor1.putInt("32",40);
+        editor1.putInt("33",30);
+        editor1.putInt("34",30);
+        editor1.putInt("35",30);
+        editor1.putInt("36",45);
+        editor1.putInt("37",40);
+        editor1.putInt("38",30);
+        editor1.putInt("39",40);
+        editor1.putInt("40",20);
+        editor1.putInt("41",60);
+        editor1.putInt("42",60);
+        editor1.putInt("43",50);
+        editor1.putInt("44",60);
+        editor1.putInt("45",80);
+        editor1.putInt("46",70);
+        editor1.putInt("47",90);
+        editor1.putInt("48",50);
+        editor1.putInt("49",50);
+        editor1.putInt("50",30);
+        editor1.putInt("51",30);
+        editor1.putInt("52",45);
+        editor1.putInt("53",20);
+        editor1.putInt("54",20);
+        editor1.putInt("55",15);
+        editor1.putInt("56",150);
+        editor1.putInt("57",40);
+        editor1.putInt("58",30);
+        editor1.putInt("59",30);
+        editor1.putInt("60",30);
+        editor1.putInt("61",30);
+        editor1.putInt("62",30);
+        editor1.putInt("63",30);
+        editor1.putInt("64",120);
+        editor1.putInt("65",150);
+        editor1.putInt("66",60);
+        editor1.putInt("67",120);
+        editor1.putInt("68",90);
+        editor1.putInt("69",120);
+        editor1.putInt("70",130);
+editor1.commit();
+
     }
 }
