@@ -8,8 +8,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
@@ -35,9 +37,11 @@ public class ServiceActivity extends AppCompatActivity {
     private int id;
     private String date;
     private String contact;
-
+    private TextView timer;
+    private CountDownTimer countDownTimer;
 
     private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences1;
     private SharedPreferences.Editor editor;
 
     @Override
@@ -48,9 +52,12 @@ public class ServiceActivity extends AppCompatActivity {
         sharedPreferences=getSharedPreferences("ServiceInfo",MODE_PRIVATE);
         editor = sharedPreferences.edit();
         startotp = findViewById(R.id.editText);
+        timer= findViewById(R.id.timer);
         endotp = findViewById(R.id.editText1);
         startOtpBtn = findViewById(R.id.otp);
         endOtpBtn = findViewById(R.id.otp1);
+
+        assignServiceTimer();
 
         name= getIntent().getExtras().getString("name");
         service = getIntent().getExtras().getString("service");
@@ -67,9 +74,8 @@ public class ServiceActivity extends AppCompatActivity {
             if(opt1.equals("1234")){
                 startotp.setVisibility(View.INVISIBLE);
                 startOtpBtn.setVisibility(View.INVISIBLE);
-                endotp.setVisibility(View.VISIBLE);
-                endOtpBtn.setVisibility(View.VISIBLE);
-                startotp.getText().clear();
+                timer.setVisibility(View.VISIBLE);
+                startTimer();
             }
         });
         
@@ -84,6 +90,31 @@ public class ServiceActivity extends AppCompatActivity {
 
 
 
+    }
+    private void startTimer() {
+
+        countDownTimer =  new CountDownTimer(30000,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int minutes = (int) millisUntilFinished/60000;
+                int seconds =(int) millisUntilFinished%60000 /1000;
+                String timer1="";
+                if(minutes<10) {
+                    timer1+="0";
+                }
+                 timer1 += minutes+":";
+                if(seconds<10) timer1+= "0";
+                timer1+=seconds;
+
+                timer.setText(timer1);
+            }
+
+            @Override
+            public void onFinish() {
+                endotp.setVisibility(View.VISIBLE);
+                endOtpBtn.setVisibility(View.VISIBLE);
+            }
+        }.start();
     }
 
     private void showpayment() {
@@ -131,5 +162,10 @@ public class ServiceActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"N Success",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void assignServiceTimer() {
+        sharedPreferences1 = getSharedPreferences("Timer",MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = sharedPreferences1.edit();
     }
 }

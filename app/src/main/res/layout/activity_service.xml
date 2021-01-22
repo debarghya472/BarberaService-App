@@ -17,11 +17,13 @@
 			app:layout_constraintTop_toTopOf="parent" />
 
 	<TextView
+			android:id="@+id/timer"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Timer"
+			android:visibility="invisible"
 			android:textColor="@color/colorAccent"
-			android:textSize="32dp"
+			android:textSize="48dp"
 			app:layout_constraintBottom_toTopOf="@+id/editText1"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0.51"
