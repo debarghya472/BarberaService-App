@@ -16,6 +16,19 @@
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
 
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Timer"
+			android:textColor="@color/colorAccent"
+			android:textSize="32dp"
+			app:layout_constraintBottom_toTopOf="@+id/editText1"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0.51"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintVertical_bias="0.85" />
+
 	<androidx.cardview.widget.CardView
 			android:id="@+id/otp1"
 			android:visibility="invisible"

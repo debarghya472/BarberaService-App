@@ -20,6 +20,7 @@ import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -53,11 +54,19 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
-        String time =convertTime(bookingItem.getTime());
+//        String time =convertTime(bookingItem.getTime());
+        String t =bookingItem.getTime();
+        String t1 = t.substring(t.indexOf('T') + 1, t.indexOf('.'));
+        String time = null;
+        try {
+            time = convertTime(t1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(bookingItem.getService());
         holder.amount.setText(bookingItem.getAmount());
-        holder.time.setText(bookingItem.getTime());
+        holder.time.setText(time);
 //        holder.direction.setOnClickListener(v -> {
 //            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
 //                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
@@ -144,10 +153,10 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             start  = itemView.findViewById(R.id.accept_btn);
         }
     }
-    private String convertTime(String time) {
-        Date date = new Date(time);
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE,MMMM d,yyyy h:mm,a", Locale.ENGLISH);
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
+    private String convertTime(String time) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss", Locale.ENGLISH);
+        Date date = sdf.parse(time);
+        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
         String formattedDate = sdf.format(date);
         return  formattedDate;
     }

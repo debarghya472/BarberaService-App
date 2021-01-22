@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,12 +19,16 @@ public class ServiceActivity extends AppCompatActivity {
     private CardView startOtpBtn;
     private  CardView endOtpBtn;
     private String amount;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service);
 
+        sharedPreferences=getSharedPreferences("ServiceInfo",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
         startotp = findViewById(R.id.editText);
         endotp = findViewById(R.id.editText1);
         startOtpBtn = findViewById(R.id.otp);
@@ -35,6 +40,8 @@ public class ServiceActivity extends AppCompatActivity {
             startOtpBtn.setEnabled(false);
             String opt1= startotp.getText().toString();
             if(opt1.equals("1234")){
+                startotp.setVisibility(View.INVISIBLE);
+                startOtpBtn.setVisibility(View.INVISIBLE);
                 endotp.setVisibility(View.VISIBLE);
                 endOtpBtn.setVisibility(View.VISIBLE);
                 startotp.getText().clear();
@@ -59,7 +66,14 @@ public class ServiceActivity extends AppCompatActivity {
         builder.setMessage("Receive Payment of Rs."+amount);
         builder.setIcon(R.drawable.logo);
 
+        int amt = Integer.parseInt(amount);
+
         builder.setPositiveButton("Paid", (dialog, which) -> {
+            int pay= sharedPreferences.getInt("payment",0);
+            int trip= sharedPreferences.getInt("trips",0);
+            editor.putInt("payment",pay+amt);
+            editor.putInt("trips",trip+1);
+            editor.commit();
             dialog.dismiss();
             finish();
         });

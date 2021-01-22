@@ -16,7 +16,7 @@
 				android:layout_height="wrap_content"
 				android:background="@color/colorAccent"
 				android:minHeight="?attr/actionBarSize"
-				app:title="Bookings"
+				app:title="My Bookings"
 				app:titleMarginStart="24dp"
 				app:titleTextColor="@color/white" />
 
