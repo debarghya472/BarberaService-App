@@ -139,8 +139,19 @@ public class ServiceActivity extends AppCompatActivity {
         builder.setPositiveButton("Paid", (dialog, which) -> {
             int pay= sharedPreferences.getInt("payment",0);
             int trip= sharedPreferences.getInt("trips",0);
+            int points = sharedPreferences.getInt("points",0);
             editor.putInt("payment",pay+amt);
             editor.putInt("trips",trip+1);
+            if(trip>=3 && trip<5)
+                editor.putInt("points",points+5);
+            else if(trip>=5 && trip<7)
+                editor.putInt("points",points+10);
+            else if(trip>=7 && trip<10)
+                editor.putInt("points",points+25);
+            else if(trip>=10)
+                editor.putInt("points",points+50);
+            else
+                editor.putInt("points",points+2);
             editor.commit();
             updateInDb(name,service,time,address,amount,id,date,contact);
             dialog.dismiss();
@@ -179,7 +190,7 @@ public class ServiceActivity extends AppCompatActivity {
     private void assignServiceTimer() {
         sharedPreferences1 = getSharedPreferences("Timer",MODE_PRIVATE);
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-        editor1.putInt("1",30);
+        editor1.putInt("1",1);
         editor1.putInt("2",40);
         editor1.putInt("3",30);
         editor1.putInt("4",60);
@@ -249,7 +260,7 @@ public class ServiceActivity extends AppCompatActivity {
         editor1.putInt("68",90);
         editor1.putInt("69",120);
         editor1.putInt("70",130);
-editor1.commit();
+        editor1.commit();
 
     }
 }

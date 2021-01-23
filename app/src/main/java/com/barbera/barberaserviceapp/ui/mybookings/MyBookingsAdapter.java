@@ -54,6 +54,8 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
 //        String time =convertTime(bookingItem.getTime());
         SharedPreferences sharedPreferences = context.getSharedPreferences("ServiceList",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences1 = context.getSharedPreferences("ServiceInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor= sharedPreferences1.edit();
         String services[] = bookingItem.getService().split(" ");
         String Servicenames ="";
         for(int i=0;i<services.length;i++){
@@ -89,6 +91,9 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         });
 
         holder.cancel.setOnClickListener(v -> {
+            int points = sharedPreferences1.getInt("points",0);
+            editor.putInt("points",points-20);
+            editor.commit();
             bookingItemList.remove(position);
             notifyDataSetChanged();
             updateAssigneeInDb(bookingItem.getName(),bookingItem.getService(),bookingItem.getTime(),bookingItem.getAddress(),bookingItem.getAmount(),
