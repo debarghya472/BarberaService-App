@@ -53,7 +53,7 @@ public class HomeFragment extends Fragment {
         points = view.findViewById(R.id.points);
 
         trips.setText(sharedPreferences.getInt("trips",0)+"");
-        earnings.setText(sharedPreferences.getInt("payment",0)+"");
+        earnings.setText("Rs. "+sharedPreferences.getInt("payment",0));
         cancelled.setText(sharedPreferences.getInt("cancel",0)+"");
         points.setText(sharedPreferences.getInt("points",0)+"");
 

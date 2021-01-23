@@ -65,11 +65,12 @@ public class MyBookingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-        if(myBookingItemList.size() != 0){
-            attachadapter();
-        }else{
-            getMyBookings();
-        }
+//        if(myBookingItemList.size() != 0){
+//            attachadapter();
+//        }else{
+//            getMyBookings();
+//        }
+        getMyBookings();
         return  view;
     }
 
