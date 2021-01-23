@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Address;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,7 +55,12 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull BookingItemAdapter.BookingItemHolder holder, int position) {
         BookingItem bookingItem = bookingItemList.get(position);
-//        String time =convertTime(bookingItem.getTime());
+        SharedPreferences sharedPreferences = context.getSharedPreferences("ServiceList",Context.MODE_PRIVATE);
+        String services[] = bookingItem.getService().split(" ");
+        String Servicenames ="";
+        for(int i=0;i<services.length;i++){
+            Servicenames = Servicenames + sharedPreferences.getString(services[i],"")+",";
+        }
         String t =bookingItem.getTime();
         String t1 = t.substring(t.indexOf('T') + 1, t.indexOf('.'));
         String time = null;
@@ -64,18 +70,9 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             e.printStackTrace();
         }
         holder.address.setText(bookingItem.getAddress());
-        holder.service.setText(bookingItem.getService());
+        holder.service.setText(Servicenames);
         holder.amount.setText(bookingItem.getAmount());
         holder.time.setText(time);
-//        holder.direction.setOnClickListener(v -> {
-//            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-//                    Uri.parse("google.navigation:q="+bookingItem.getAddress()));
-//            context.startActivity(intent);
-//        });
-//        holder.cancel.setOnClickListener(v -> {
-//            bookingItemList.remove(position);
-//            notifyDataSetChanged();
-//        });
 
         holder.start.setOnClickListener(v -> {
             bookingItemList.remove(position);

@@ -3,6 +3,7 @@ package com.barbera.barberaserviceapp.ui.mybookings;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,12 +53,19 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         BookingItem bookingItem = bookingItemList.get(position);
 
 //        String time =convertTime(bookingItem.getTime());
+        SharedPreferences sharedPreferences = context.getSharedPreferences("ServiceList",Context.MODE_PRIVATE);
+        String services[] = bookingItem.getService().split(" ");
+        String Servicenames ="";
+        for(int i=0;i<services.length;i++){
+            Servicenames = Servicenames + sharedPreferences.getString(services[i],"")+",";
+        }
+
 
         holder.address.setText(bookingItem.getAddress());
         holder.name.setText(bookingItem.getName());
         holder.time.setText(bookingItem.getTime());
         holder.contact.setText(bookingItem.getContact());
-        holder.service.setText(bookingItem.getService());
+        holder.service.setText(Servicenames);
         holder.amount.setText(bookingItem.getAmount());
 //        Date date = bookingItem.getDate();
 
