@@ -30,7 +30,7 @@ public class ServiceActivity extends AppCompatActivity {
     private  CardView endOtpBtn;
     private String name;
     private String service;
-    private String time;
+    private int time;
     private String address;
     private String amount;
     private int id;
@@ -61,7 +61,7 @@ public class ServiceActivity extends AppCompatActivity {
 
         name= getIntent().getExtras().getString("name");
         service = getIntent().getExtras().getString("service");
-        time = getIntent().getExtras().getString("time");
+        time = getIntent().getExtras().getInt("time");
         address = getIntent().getExtras().getString("address");
         amount = getIntent().getExtras().getString("amount");
         id= getIntent().getExtras().getInt("id");
@@ -161,7 +161,7 @@ public class ServiceActivity extends AppCompatActivity {
         dialog.show();
 
     }
-    private void updateInDb(String name, String service, String time, String address, String amount, int id, String date, String contact) {
+    private void updateInDb(String name, String service, int time, String address, String amount, int id, String date, String contact) {
         Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         final ProgressDialog progressDialog=new ProgressDialog(ServiceActivity.this);

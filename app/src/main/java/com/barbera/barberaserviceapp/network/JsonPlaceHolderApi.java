@@ -13,6 +13,6 @@ public interface JsonPlaceHolderApi {
     Call<BookingList> getBookings();
 
     @POST("exec")
-    Call<String> updateAssignee(@Query("name") String name, @Query("service")String service, @Query("time")String Time, @Query("address") String address
+    Call<String> updateAssignee(@Query("name") String name, @Query("service")String service, @Query("time")int Time, @Query("address") String address
     , @Query("amount")String amount,@Query("assignedTo") String assignee,@Query("action")String action,@Query("status")int status,@Query("id")int id, @Query("date")String date, @Query("contact")String contact);
 }

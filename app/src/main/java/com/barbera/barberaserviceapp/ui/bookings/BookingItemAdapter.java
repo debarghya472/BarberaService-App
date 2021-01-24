@@ -61,14 +61,8 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         for(int i=0;i<services.length;i++){
             Servicenames = Servicenames + sharedPreferences.getString(services[i],"")+",";
         }
-        String t =bookingItem.getTime();
-        String t1 = t.substring(t.indexOf('T') + 1, t.indexOf('.'));
-        String time = null;
-        try {
-            time = convertTime(t1);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String time = convertTime(bookingItem.getTime());
+
         holder.address.setText(bookingItem.getAddress());
         holder.service.setText(Servicenames);
         holder.amount.setText(bookingItem.getAmount());
@@ -82,7 +76,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         });
     }
 
-    private void updateAssigneeInDb(String name, String service, String time, String address, String amount, int id,String date, String contact) {
+    private void updateAssigneeInDb(String name, String service, int time, String address, String amount, int id,String date, String contact) {
         Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         final ProgressDialog progressDialog=new ProgressDialog(context);
@@ -150,11 +144,17 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
             start  = itemView.findViewById(R.id.accept_btn);
         }
     }
-    private String convertTime(String time) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss", Locale.ENGLISH);
-        Date date = sdf.parse(time);
-        sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
-        String formattedDate = sdf.format(date);
-        return  formattedDate;
+    private String convertTime(int time) {
+        int hrs= time /100;
+        int min = time%100;
+        String Time="";
+        if(hrs>11){
+            hrs = hrs -11;
+            Time = min+"0 PM";
+        }else{
+            Time = min+"0 AM";
+        }
+        Time = hrs+":"+ Time;
+        return Time;
     }
 }

@@ -62,10 +62,11 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             Servicenames = Servicenames + sharedPreferences.getString(services[i],"")+",";
         }
 
+        String time = convertTime(bookingItem.getTime());
 
         holder.address.setText(bookingItem.getAddress());
         holder.name.setText(bookingItem.getName());
-        holder.time.setText(bookingItem.getTime());
+        holder.time.setText(time);
         holder.contact.setText(bookingItem.getContact());
         holder.service.setText(Servicenames);
         holder.amount.setText(bookingItem.getAmount());
@@ -102,7 +103,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
     }
 
-    private void updateAssigneeInDb(String name, String service, String time, String address, String amount, int id, String date, String contact) {
+    private void updateAssigneeInDb(String name, String service, int time, String address, String amount, int id, String date, String contact) {
         Retrofit retrofit = RetrofitClientInstance.getRetrofitInstance();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
         final ProgressDialog progressDialog=new ProgressDialog(context);
@@ -129,12 +130,18 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             }
         });
     }
-
-    private String convertTime(Date date) {
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE,MMMM d,yyyy h:mm,a", Locale.ENGLISH);
-        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Kolkata"));
-        String formattedDate = sdf.format(date);
-        return  formattedDate;
+    private String convertTime(int time) {
+        int hrs= time /100;
+        int min = time%100;
+        String Time="";
+        if(hrs>11){
+            hrs = hrs -11;
+            Time = min+"0 PM";
+        }else{
+            Time = min+"0 AM";
+        }
+        Time = hrs+":"+ Time;
+        return Time;
     }
 
 
