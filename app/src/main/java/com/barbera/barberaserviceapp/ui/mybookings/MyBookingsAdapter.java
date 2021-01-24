@@ -133,13 +133,25 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
     private String convertTime(int time) {
         int hrs= time /100;
         int min = time%100;
+        int hrs1= hrs;
         String Time="";
-        if(hrs>11){
-            hrs = hrs -11;
-            Time = min+"0 PM";
+        if(hrs>12){
+            hrs = hrs -12;
+            if(min == 0)
+                Time = min+"0 ";
+            else
+                Time = min+" ";
         }else{
-            Time = min+"0 AM";
+            if(min == 0)
+                Time = min+"0 ";
+            else
+                Time = min+" ";
         }
+        if(hrs1>11)
+            Time =Time+ "PM";
+        else
+            Time = Time +"AM";
+
         Time = hrs+":"+ Time;
         return Time;
     }
