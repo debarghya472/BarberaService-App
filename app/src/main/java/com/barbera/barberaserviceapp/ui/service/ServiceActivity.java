@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,12 +41,18 @@ public class ServiceActivity extends AppCompatActivity {
     private String contact;
     private TextView timer;
     private String[] ch;
+
     private CountDownTimer countDownTimer;
+    private long TimeLeftInMil;
+    private long totalTime;
+    public static boolean timerRunning = false;
+    private long endTimer;
 
     private SharedPreferences sharedPreferences;
     private SharedPreferences sharedPreferences1;
     private SharedPreferences.Editor editor;
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +68,7 @@ public class ServiceActivity extends AppCompatActivity {
 
         assignServiceTimer();
 
-        name= getIntent().getExtras().getString("name");
+        name= Objects.requireNonNull(getIntent().getExtras()).getString("name");
         service = getIntent().getExtras().getString("service");
         time = getIntent().getExtras().getInt("time");
         address = getIntent().getExtras().getString("address");
@@ -77,7 +86,7 @@ public class ServiceActivity extends AppCompatActivity {
                 startotp.setVisibility(View.INVISIBLE);
                 startOtpBtn.setVisibility(View.INVISIBLE);
                 timer.setVisibility(View.VISIBLE);
-                calculateTime();
+                startTimer();
             }
         });
         
@@ -89,24 +98,65 @@ public class ServiceActivity extends AppCompatActivity {
                 showpayment();
             }
         });
+        calculateTime();
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences prefs = getSharedPreferences("LiveTimer", MODE_PRIVATE);
+        TimeLeftInMil = prefs.getLong("millisLeft",totalTime);
+        timerRunning = prefs.getBoolean("timerRunning",false);
+        if(TimeLeftInMil == 0){
+            TimeLeftInMil = totalTime;
+        }
 
+        if(timerRunning){
+            endTimer = prefs.getLong("endTime",0);
+            TimeLeftInMil = endTimer - System.currentTimeMillis();
+            if(TimeLeftInMil<0){
+                timerRunning = false;
+                countDownTimer.cancel();
+            }else{
+                startTimer();
+                startOtpBtn.setVisibility(View.INVISIBLE);
+                startotp.setVisibility(View.INVISIBLE);
+                timer.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        SharedPreferences prefs = getSharedPreferences("LiveTimer", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putLong("millisLeft", TimeLeftInMil);
+        editor.putBoolean("timerRunning", timerRunning);
+        editor.putLong("endTime", endTimer);
+        editor.apply();
+
+//        if(countDownTimer!=null){
+//            countDownTimer.cancel();
+//        }
     }
 
     private void calculateTime() {
-        int timeInMin= 0;
-        for(int i =0;i<ch.length;i++){
-            timeInMin = timeInMin+sharedPreferences1.getInt(ch[i],0);
+        long timeInMin= 0;
+        for (String s : ch) {
+            timeInMin = timeInMin + sharedPreferences1.getInt(s, 0);
         }
-        startTimer(timeInMin);
+        totalTime = timeInMin*60000;
     }
 
-    private void startTimer(int timeInMin) {
-        int time = timeInMin*60*1000;
-        countDownTimer =  new CountDownTimer(time,1000) {
+    private void startTimer() {
+        endTimer = System.currentTimeMillis() + TimeLeftInMil;
+        timerRunning = true;
+        countDownTimer =  new CountDownTimer(TimeLeftInMil,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                TimeLeftInMil = millisUntilFinished;
                 int minutes = (int) millisUntilFinished/60000;
                 int seconds =(int) millisUntilFinished%60000 /1000;
                 String timer1="";
@@ -124,8 +174,10 @@ public class ServiceActivity extends AppCompatActivity {
             public void onFinish() {
                 endotp.setVisibility(View.VISIBLE);
                 endOtpBtn.setVisibility(View.VISIBLE);
+                timerRunning =false;
             }
         }.start();
+
     }
 
     private void showpayment() {
@@ -154,6 +206,9 @@ public class ServiceActivity extends AppCompatActivity {
             editor.commit();
             updateInDb(name,service,time,address,amount,id,date,contact);
             dialog.dismiss();
+            timerRunning =false;
+            TimeLeftInMil = 0;
+            endTimer = 0;
         });
         builder.setNegativeButton("Not Paid", (dialog, which) -> dialog.dismiss());
 

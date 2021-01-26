@@ -65,13 +65,18 @@ public class MyBookingFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
-//        if(myBookingItemList.size() != 0){
-//            attachadapter();
-//        }else{
-//            getMyBookings();
-//        }
-        getMyBookings();
+        if(myBookingItemList.size() != 0){
+            attachadapter();
+        }else{
+            getMyBookings();
+        }
         return  view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getMyBookings();
     }
 
     private void getMyBookings() {
@@ -95,6 +100,7 @@ public class MyBookingFragment extends Fragment {
                 List<BookingItem> bookingLists = response.body().getBookingItemList();
                 if(bookingLists == null){
                     Toast.makeText(getContext(),"Cannot find any bookings",Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
                 }else{
                     for(BookingItem bookingItem: bookingLists){
                         if(bookingItem.getStatus() == 1 && bookingItem.getAssignee().equals("debarghya")){
