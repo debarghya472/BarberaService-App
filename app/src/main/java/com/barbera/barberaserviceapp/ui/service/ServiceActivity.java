@@ -117,7 +117,6 @@ public class ServiceActivity extends AppCompatActivity {
             TimeLeftInMil = endTimer - System.currentTimeMillis();
             if(TimeLeftInMil<0){
                 timerRunning = false;
-                countDownTimer.cancel();
             }else{
                 startTimer();
                 startOtpBtn.setVisibility(View.INVISIBLE);

@@ -64,19 +64,8 @@ public class MyBookingFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_mybooking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-
-        if(myBookingItemList.size() != 0){
-            attachadapter();
-        }else{
-            getMyBookings();
-        }
-        return  view;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
         getMyBookings();
+        return  view;
     }
 
     private void getMyBookings() {
