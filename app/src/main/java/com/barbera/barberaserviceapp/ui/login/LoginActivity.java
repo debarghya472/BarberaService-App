@@ -37,9 +37,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         });
 
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-        }
         login.setOnClickListener(v -> {
             if(checkEmailAndPassword()){
                 final ProgressDialog progressDialog=new ProgressDialog(LoginActivity.this);
@@ -66,6 +63,14 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+        }
     }
 
     private boolean checkEmailAndPassword() {

@@ -64,8 +64,14 @@ public class MyBookingFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_mybooking);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
-        getMyBookings();
+//        getMyBookings();
         return  view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getMyBookings();
     }
 
     private void getMyBookings() {
@@ -107,6 +113,7 @@ public class MyBookingFragment extends Fragment {
             @Override
             public void onFailure(@NotNull Call<BookingList> call, @NotNull Throwable t) {
                 Toast.makeText(getContext(),"Cannot find any bookings",Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
             }
         });
 
