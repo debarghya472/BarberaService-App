@@ -32,9 +32,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import static com.barbera.barberaserviceapp.ui.service.ServiceActivity.timerRunning;
+
 public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.MyBookingItemHolder> {
     private List<BookingItem> bookingItemList;
     private Context context;
+    public static  int counterId;
 
     public MyBookingsAdapter(List<BookingItem> booking, Context context){
         this.bookingItemList = booking;
@@ -72,6 +75,16 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         holder.amount.setText(bookingItem.getAmount());
 //        Date date = bookingItem.getDate();
 
+        if(timerRunning && counterId ==bookingItem.getId()){
+            holder.start.setVisibility(View.INVISIBLE);
+            holder.cancel.setVisibility(View.INVISIBLE);
+            holder.live.setVisibility(View.VISIBLE);
+            holder.livebtn.setVisibility(View.VISIBLE);
+        }
+        holder.livebtn.setOnClickListener(v -> {
+            context.startActivity(new Intent(context,ServiceActivity.class));
+        });
+
         holder.direction.setOnClickListener(v -> {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                     Uri.parse("google.navigation:q="+bookingItem.getAddress()));
@@ -79,6 +92,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         });
 
         holder.start.setOnClickListener(v -> {
+            counterId = bookingItem.getId();
             Intent intent = new Intent(context, ServiceActivity.class);
             intent.putExtra("name",bookingItem.getName());
             intent.putExtra("service",bookingItem.getService());
@@ -172,6 +186,8 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         private TextView amount;
         private Button start;
         private Button cancel;
+        private TextView live;
+        private Button livebtn;
 
 
         public MyBookingItemHolder(@NonNull View itemView) {
@@ -186,6 +202,9 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             amount = itemView.findViewById(R.id.amt123);
             start =itemView.findViewById(R.id.start);
             cancel = itemView.findViewById(R.id.cancel_button);
+            live = itemView.findViewById(R.id.live);
+            livebtn = itemView.findViewById(R.id.liveBtn);
+
         }
     }
 }
