@@ -1,5 +1,6 @@
 package com.barbera.barberaserviceapp.ui.service;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -17,6 +18,10 @@ import android.widget.Toast;
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -32,6 +37,8 @@ public class ServiceActivity extends AppCompatActivity {
     private CardView startOtpBtn;
     private  CardView endOtpBtn;
     private String name;
+    private String start;
+    private String end;
     private String service;
     private int time;
     private String address;
@@ -41,6 +48,7 @@ public class ServiceActivity extends AppCompatActivity {
     private String contact;
     private TextView timer;
     private String[] ch;
+    private FirebaseFirestore firestore;
 
     private CountDownTimer countDownTimer;
     private long TimeLeftInMil;
@@ -78,24 +86,55 @@ public class ServiceActivity extends AppCompatActivity {
         contact = getIntent().getExtras().getString("contact");
 
         ch = service.split(" ");
+        firestore=  FirebaseFirestore.getInstance();
+        firestore.collection("Users").document(date).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            String sd= task.getResult().get("startOtp").toString();
+                            start = sd;
+//                            Toast.makeText(getApplicationContext(),"FSS"+start,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+        firestore=  FirebaseFirestore.getInstance();
+        firestore.collection("Users").document(date).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if(task.isSuccessful()){
+                            end = task.getResult().get("endOtp").toString();
+                            Toast.makeText(getApplicationContext(),"FSS"+ end,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
 
         startOtpBtn.setOnClickListener(v -> {
-            startOtpBtn.setEnabled(false);
-            String opt1= startotp.getText().toString();
-            if(opt1.equals("1234")){
+            String otpentered= startotp.getText().toString();
+//            startOtpBtn.setEnabled(false);
+
+
+            if(otpentered.equals(start)){
                 startotp.setVisibility(View.INVISIBLE);
                 startOtpBtn.setVisibility(View.INVISIBLE);
                 timer.setVisibility(View.VISIBLE);
                 startTimer();
+            }else {
+                Toast.makeText(getApplicationContext(),"Wrong Otp!!",Toast.LENGTH_SHORT).show();
             }
         });
         
         endOtpBtn.setOnClickListener(v -> {
-            startOtpBtn.setEnabled(false);
+//            startOtpBtn.setEnabled(false);
             String otp2 = endotp.getText().toString();
-            if(otp2.equals("0909")){
+            if(otp2.equals(end)){
                 endotp.getText().clear();
                 showpayment();
+            }else{
+                Toast.makeText(getApplicationContext(),"Wrong Otp!!",Toast.LENGTH_SHORT).show();
             }
         });
         calculateTime();
