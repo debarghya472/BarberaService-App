@@ -24,6 +24,7 @@ import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
 import com.barbera.barberaserviceapp.ui.bookings.BookingList;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -98,7 +99,7 @@ public class MyBookingFragment extends Fragment {
                     progressDialog.dismiss();
                 }else{
                     for(BookingItem bookingItem: bookingLists){
-                        if(bookingItem.getStatus() == 1 && bookingItem.getAssignee().equals("debarghya")){
+                        if(bookingItem.getStatus() == 1 && bookingItem.getAssignee().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                             myBookingItemList.add(new BookingItem(bookingItem.getId(),bookingItem.getName(),bookingItem.getService(),bookingItem.getDate(),bookingItem.getTime(),
                                     bookingItem.getAddress(),bookingItem.getAmount(),bookingItem.getAssignee(),bookingItem.getStatus(),bookingItem.getContact()));
                         }

@@ -20,6 +20,7 @@ import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -83,7 +84,7 @@ public class BookingItemAdapter extends RecyclerView.Adapter<BookingItemAdapter.
         progressDialog.setMessage("Adding Booking!!");
         progressDialog.show();
         progressDialog.setCancelable(true);
-        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",1,id,date,contact);
+        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount, FirebaseAuth.getInstance().getCurrentUser().getUid(),"update",1,id,date,contact);
 //        call.enqueue(new Callback<BookingList>() {
 //            @Override
 //            public void onResponse(Call<BookingList> call, Response<BookingList> response) {
