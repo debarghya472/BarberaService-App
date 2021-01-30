@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class ProfileFragment extends Fragment {
 
     private TextView name;
+    private ImageView refresh;
     private TextView email;
     private TextView phone;
     private TextView earnings;
@@ -38,6 +40,7 @@ public class ProfileFragment extends Fragment {
     private  TextView trips;
     private CardView logout;
     private  CardView login;
+    private int key =0;
     private String profilename="";
     private SharedPreferences sharedPreferences;
 
@@ -47,6 +50,7 @@ public class ProfileFragment extends Fragment {
        View view= inflater.inflate(R.layout.fragment_profile,container,false);
        name = (TextView)view.findViewById(R.id.NameInProfile);
        email = (TextView)view.findViewById(R.id.EmailInProfile);
+       refresh = view.findViewById(R.id.refresh);
        phone =(TextView)view.findViewById(R.id.PhoneInProfile);
        earnings =(TextView)view.findViewById(R.id.earning);
        points =(TextView)view.findViewById(R.id.points);
@@ -54,6 +58,11 @@ public class ProfileFragment extends Fragment {
        logout=(CardView)view.findViewById(R.id.logout);
        login =(CardView)view.findViewById(R.id.login);
        sharedPreferences = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+
+       refresh.setOnClickListener(v -> {
+           key =1;
+           displayProfile();
+       });
 
        displayProfile();
        return view;
@@ -63,11 +72,12 @@ public class ProfileFragment extends Fragment {
         if(FirebaseAuth.getInstance().getCurrentUser()==null){
             login.setVisibility(View.VISIBLE);
             Toast.makeText(getContext(),"User Not Logged In",Toast.LENGTH_SHORT).show();
-        }else if(sharedPreferences.getString("profilename","") == ""){
+        }else if(sharedPreferences.getString("profilename","") == "" || key ==1){
             final ProgressDialog progressDialog=new ProgressDialog(getContext());
             progressDialog.setMessage("Fetching Details...");
             progressDialog.show();
             progressDialog.setCancelable(false);
+            key =0;
             FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override

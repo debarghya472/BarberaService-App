@@ -305,7 +305,7 @@ public class ServiceActivity extends AppCompatActivity {
             int finalPoints = points;
             FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .get().addOnCompleteListener(task -> {
-                        int e = Integer.parseInt(task.getResult().get("earnings").toString())+pay;
+                        int e = Integer.parseInt(task.getResult().get("earnings").toString())+Integer.parseInt(amount);
                         int p = Integer.parseInt(task.getResult().get("points").toString())+ finalPoints;
                         int t =Integer.parseInt(task.getResult().get("trips").toString())+1;
 
