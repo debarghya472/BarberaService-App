@@ -96,7 +96,13 @@ public class ServiceActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
-                            String sd= task.getResult().get("startOtp").toString();
+                            String sd = "";
+//
+                            try{
+                            sd= task.getResult().get("startOtp").toString();
+                            }catch (Exception e){
+                                Toast.makeText(getApplicationContext(),"Ask Customer to start Service",Toast.LENGTH_SHORT).show();
+                            }
                             start = sd;
 //                            Toast.makeText(getApplicationContext(),"FSS"+start,Toast.LENGTH_SHORT).show();
                         }
@@ -109,36 +115,76 @@ public class ServiceActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
+                            try{
                             end = task.getResult().get("endOtp").toString();
-                            Toast.makeText(getApplicationContext(),"FSS"+ end,Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){
+
+                            }
                         }
                     }
                 });
 
 
         startOtpBtn.setOnClickListener(v -> {
-            String otpentered= startotp.getText().toString();
+            String otpentered = startotp.getText().toString();
 //            startOtpBtn.setEnabled(false);
 
-
-            if(otpentered.equals(start)){
-                startotp.setVisibility(View.INVISIBLE);
-                startOtpBtn.setVisibility(View.INVISIBLE);
-                timer.setVisibility(View.VISIBLE);
-                startTimer();
-            }else {
-                Toast.makeText(getApplicationContext(),"Wrong Otp!!",Toast.LENGTH_SHORT).show();
+            if (start != null) {
+                if (otpentered.equals(start)) {
+                    startotp.setVisibility(View.INVISIBLE);
+                    startOtpBtn.setVisibility(View.INVISIBLE);
+                    timer.setVisibility(View.VISIBLE);
+                    startTimer();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Wrong Otp!!", Toast.LENGTH_SHORT).show();
+                    firestore.collection("Users").document(date).get()
+                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if(task.isSuccessful()){
+                                        String sd = "";
+//
+                                        try{
+                                            sd= task.getResult().get("startOtp").toString();
+                                        }catch (Exception e){
+                                            Toast.makeText(getApplicationContext(),"Ask Customer to start Service",Toast.LENGTH_SHORT).show();
+                                        }
+                                        start = sd;
+//                            Toast.makeText(getApplicationContext(),"FSS"+start,Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Ask Customer to start Service", Toast.LENGTH_SHORT).show();
             }
         });
-        
+
         endOtpBtn.setOnClickListener(v -> {
 //            startOtpBtn.setEnabled(false);
             String otp2 = endotp.getText().toString();
-            if(otp2.equals(end)){
-                endotp.getText().clear();
-                showpayment();
-            }else{
-                Toast.makeText(getApplicationContext(),"Wrong Otp!!",Toast.LENGTH_SHORT).show();
+            if (end != null) {
+                if (otp2.equals(end)) {
+                    endotp.getText().clear();
+                    showpayment();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Wrong Otp!!", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(),"Ask Customer to end service",Toast.LENGTH_SHORT).show();
+                firestore.collection("Users").document(date).get()
+                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful()){
+                                    try{
+                                        end = task.getResult().get("endOtp").toString();
+                                    }catch (Exception e){
+
+                                    }
+                                }
+                            }
+                        });
             }
         });
         calculateTime();
