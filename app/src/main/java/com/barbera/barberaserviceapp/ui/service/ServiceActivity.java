@@ -7,6 +7,7 @@ import androidx.cardview.widget.CardView;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -20,9 +21,12 @@ import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -231,17 +235,43 @@ public class ServiceActivity extends AppCompatActivity {
             int points = sharedPreferences.getInt("points",0);
             editor.putInt("payment",pay+amt);
             editor.putInt("trips",trip+1);
-            if(trip>=3 && trip<5)
-                editor.putInt("points",points+5);
-            else if(trip>=5 && trip<7)
-                editor.putInt("points",points+10);
-            else if(trip>=7 && trip<10)
+            if(trip>=3 && trip<5){
+                points = points+5;
+                editor.putInt("points",points);
+            }
+            else if(trip>=5 && trip<7){
+                points += 10;
+                editor.putInt("points",points);
+            }
+            else if(trip>=7 && trip<10){
+                points+=25;
                 editor.putInt("points",points+25);
-            else if(trip>=10)
-                editor.putInt("points",points+50);
-            else
-                editor.putInt("points",points+2);
+            }
+            else if(trip>=10){
+                points+=50;
+                editor.putInt("points",points);
+            }
+            else {
+                points+=2;
+                editor.putInt("points", points);
+            }
             editor.commit();
+            int finalPoints = points;
+            FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    .get().addOnCompleteListener(task -> {
+                        int e = Integer.parseInt(task.getResult().get("earnings").toString())+pay;
+                        int p = Integer.parseInt(task.getResult().get("points").toString())+ finalPoints;
+                        int t =Integer.parseInt(task.getResult().get("trips").toString())+1;
+
+                Map<String,Object> user=new HashMap<>();
+                user.put("earnings",e+"");
+                user.put("points",p+"");
+                user.put("trips",t+"");
+                FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .update(user).addOnCompleteListener(task1 -> {
+
+                        });
+            });
             updateInDb(name,service,time,address,amount,id,date,contact);
             dialog.dismiss();
             timerRunning =false;
