@@ -1,5 +1,6 @@
 package com.barbera.barberaserviceapp;
 
+import android.Manifest;
 import android.app.Application;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,20 +10,19 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.pubnub.api.PNConfiguration;
+import com.pubnub.api.PubNub;
+
 import io.realm.Realm;
 
 public class ServiceApplication extends Application {
+    public static final String ID ="live location";
+    public static PubNub pubnub;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onCreate() {
         super.onCreate();
-//        Realm.init(this);
-        NotificationChannel notificationChannel = new NotificationChannel("12" , "addservice", NotificationManager.IMPORTANCE_HIGH);
-        notificationChannel.enableLights(true);
-        notificationChannel.enableVibration(true);
-        notificationChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.createNotificationChannel(notificationChannel);
+        initPubnub();
 
         SharedPreferences sharedPreferences = getSharedPreferences("ServiceList",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -98,6 +98,26 @@ public class ServiceApplication extends Application {
         editor.putString("70","gold facial+ milk hand wax+ full leg milk wax + threading");
         editor.commit();
 
+        createNotification();
 
     }
+    private void initPubnub() {
+        PNConfiguration pnConfiguration = new PNConfiguration();
+        pnConfiguration.setSubscribeKey("sub-c-27ca2eba-78f1-11eb-b338-de22a5d8105b");
+        pnConfiguration.setPublishKey("pub-c-f5d42daf-d998-43a8-a9ac-272850696a87");
+        pnConfiguration.setSecure(true);
+        pubnub = new PubNub(pnConfiguration);
+    }
+    private void createNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel serviceChannel = new NotificationChannel(
+                    ID,
+                    "Live Location Channel",
+                    NotificationManager.IMPORTANCE_DEFAULT
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(serviceChannel);
+        }
+    }
+
 }
