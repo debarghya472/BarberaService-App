@@ -28,6 +28,7 @@ import static com.barbera.barberaserviceapp.ServiceApplication.pubnub;
 
 public class LiveLocationService extends Service {
     private FusedLocationProviderClient mFusedLocationClient;
+    public static final String person = "Service 1";
 
     private LocationRequest locationRequest;
     @Nullable
@@ -56,7 +57,7 @@ public class LiveLocationService extends Service {
                     LinkedHashMap<String, String> message = getNewLocationMessage(location.getLatitude(), location.getLongitude());
                     pubnub.publish()
                             .message(message)
-                            .channel("Service 1")
+                            .channel(person)
                             .async(new PNCallback<PNPublishResult>() {
                                 @Override
                                 public void onResponse(PNPublishResult result, PNStatus status) {
