@@ -323,6 +323,12 @@ public class ServiceActivity extends AppCompatActivity {
             timerRunning =false;
             TimeLeftInMil = 0;
             endTimer = 0;
+            SharedPreferences prefs = getSharedPreferences("LiveTimer", MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putLong("millisLeft", TimeLeftInMil);
+            editor.putBoolean("timerRunning", timerRunning);
+            editor.putLong("endTime", endTimer);
+            editor.apply();
         });
         builder.setNegativeButton("Not Paid", (dialog, which) -> dialog.dismiss());
 
@@ -362,7 +368,7 @@ public class ServiceActivity extends AppCompatActivity {
     private void assignServiceTimer() {
         sharedPreferences1 = getSharedPreferences("Timer",MODE_PRIVATE);
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-        editor1.putInt("1",30);
+        editor1.putInt("1",1);
         editor1.putInt("2",40);
         editor1.putInt("3",30);
         editor1.putInt("4",60);

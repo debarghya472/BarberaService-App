@@ -122,6 +122,7 @@ public class ImageVerifyActivity extends AppCompatActivity {
         intent.putExtra("id",id);
         intent.putExtra("date",date);
         intent.putExtra("contact",contact);
+        finish();
         startActivity(intent);
     }
 
