@@ -5,7 +5,7 @@
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.CAMERA" />
 	<uses-permission android:name="android.permission.INTERNET" />
 
 	<application
@@ -16,7 +16,8 @@
 			android:roundIcon="@mipmap/ic_launcher_round"
 			android:supportsRtl="true"
 			android:theme="@style/AppTheme">
-		<activity android:name=".ui.service.ImageVerifyActivity"></activity>
+		<activity android:name=".ui.servicedetails.ServiceDetails"></activity>
+		<activity android:name=".ui.service.ImageVerifyActivity" />
 		<activity
 				android:name=".ui.service.ServiceActivity"
 				android:screenOrientation="portrait"
