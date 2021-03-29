@@ -25,6 +25,17 @@ public class PersonalDetails extends AppCompatActivity {
         address=(EditText) findViewById(R.id.add);
         submit=(Button) findViewById(R.id.Btn1);
 
+        Intent intent = getIntent();
+        String name1 = intent.getStringExtra("name");
+        String num1 = intent.getStringExtra("number");
+        String add1 = intent.getStringExtra("address");
+
+        if(name1!=null){
+            name.setText(name1);
+            number.setText(num1);
+            address.setText(add1);
+        }
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

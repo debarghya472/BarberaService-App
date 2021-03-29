@@ -24,6 +24,15 @@ public class PersonalDocuments extends AppCompatActivity {
         pan = (EditText) findViewById(R.id.pan);
         submit=(Button) findViewById(R.id.Btn2);
 
+        Intent intent = getIntent();
+        String aadh1 = intent.getStringExtra("aadhar");
+        String pan1 = intent.getStringExtra("pan");
+
+        if(aadh1!=null){
+            aadhar.setText(aadh1);
+            pan.setText(pan1);
+        }
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

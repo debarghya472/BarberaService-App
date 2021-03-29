@@ -33,7 +33,9 @@ public class ServiceDetails extends AppCompatActivity {
     private Button submit;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
-    private String name;
+    private String name,number,address,aadhar,pan;
+    Bitmap rc= VehicleDetails.rc_bitmap;
+    Bitmap license= VehicleDetails.lic_bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,10 +45,25 @@ public class ServiceDetails extends AppCompatActivity {
         vehicle_details=(CardView) findViewById(R.id.vd);
         submit=(Button) findViewById(R.id.Btn);
 
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
+
+        SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
+        boolean ver1 = preferences.getBoolean("personal_det",false);
+        boolean ver2 = preferences.getBoolean("personal_doc",false);
+        boolean ver3 = preferences.getBoolean("vehicle_det",false);
+        name = preferences.getString("name",null);
+        number = preferences.getString("number",null);
+        address = preferences.getString("address",null);
+        aadhar = preferences.getString("aadhar",null);
+        pan = preferences.getString("pan",null);
+
         personal_documents.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(ServiceDetails.this,PersonalDocuments.class);
+                intent.putExtra("aadhar",aadhar);
+                intent.putExtra("pan",pan);
                 startActivity(intent);
             }
         });
@@ -54,6 +71,9 @@ public class ServiceDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(ServiceDetails.this,PersonalDetails.class);
+                intent.putExtra("name",name);
+                intent.putExtra("number",number);
+                intent.putExtra("address",address);
                 startActivity(intent);
             }
         });
@@ -67,22 +87,11 @@ public class ServiceDetails extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
-                boolean ver1 = preferences.getBoolean("personal_det",false);
-                boolean ver2 = preferences.getBoolean("personal_doc",false);
-                boolean ver3 = preferences.getBoolean("vehicle_det",false);
-                name = preferences.getString("name",null);
-                String number = preferences.getString("number",null);
-                String address = preferences.getString("address",null);
-                String aadhar = preferences.getString("aadhar",null);
-                String pan = preferences.getString("pan",null);
+                //Toast.makeText(getApplicationContext(),name+" "+aadhar+" "+ver1+" "+ver2+" "+ver3,Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(),name+" "+aadhar+" "+ver1+" "+ver2+" "+ver3,Toast.LENGTH_SHORT).show();
-                Bitmap rc= VehicleDetails.rc_bitmap;
-                Bitmap license= VehicleDetails.lic_bitmap;
                 if(ver1 && ver2 && ver3){
-                    //uploadImageToFirebase(rc);
-                    //uploadImageToFirebase(license);
+                    uploadImageToFirebase(rc,1);
+                    uploadImageToFirebase(license,2);
                     Map<String,Object> mp = new HashMap<>();
                     mp.put("name",name);
                     mp.put("number",number);
@@ -111,7 +120,7 @@ public class ServiceDetails extends AppCompatActivity {
         });
 
     }
-    private void uploadImageToFirebase(Bitmap bitmap) {
+    private void uploadImageToFirebase(Bitmap bitmap, int x) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] data = baos.toByteArray();
@@ -121,7 +130,7 @@ public class ServiceDetails extends AppCompatActivity {
         progressDialog.show();
 
 
-        StorageReference ref = storageReference.child("barbers/"+name);
+        StorageReference ref = storageReference.child("barbers/"+name+x);
 
         ref.putBytes(data)
                 .addOnSuccessListener(taskSnapshot -> {
