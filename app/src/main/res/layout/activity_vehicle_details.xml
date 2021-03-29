@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:context=".ui.servicedetails.ServiceDetails">
+
+	<RelativeLayout
+			android:id="@+id/profile_card_section"
+			android:layout_width="match_parent"
+			android:layout_height="180dp"
+			android:background="@color/colorAccent"
+			app:layout_constraintTop_toTopOf="parent">
+
+		<ImageView
+				android:id="@+id/profile_image"
+				android:layout_width="95dp"
+				android:layout_height="95dp"
+				android:layout_centerVertical="true"
+				android:layout_margin="20dp"
+				android:src="@drawable/barberawhite" />
+
+		<TextView
+				android:id="@+id/EmailInProfile"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true"
+				android:layout_marginTop="30dp"
+				android:textColor="@color/white"
+				android:textSize="18sp"
+				android:textStyle="bold"
+				tools:text="Service App" />
+
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/EmailInProfile"
+				android:layout_marginStart="140dp"
+				android:layout_marginTop="12dp"
+				android:layout_marginEnd="12dp"
+				android:text="Please enter your correct details. All your details will be verified before any booking is assigned"
+				android:textColor="@color/CardWhite" />
+	</RelativeLayout>
+
+	<LinearLayout
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/profile_card_section">
+
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+			<TextView
+					android:id="@+id/text_"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="20dp"
+					android:text="Upload Driving Licence"
+					android:textColor="@color/colorAccent"
+					android:textSize="20sp" />
+
+			<ImageView
+					android:id="@+id/img1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/text_"
+					android:layout_margin="20dp"
+					android:src="@drawable/ic_arrow" />
+
+			<Button
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/text_"
+					android:layout_toRightOf="@id/img1"
+					android:text="Take Photo" />
+		</RelativeLayout>
+		<RelativeLayout
+				android:layout_width="match_parent"
+				android:layout_height="match_parent">
+
+			<TextView
+					android:id="@+id/text__"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="20dp"
+					android:text="Upload RC"
+					android:textColor="@color/colorAccent"
+					android:textSize="20sp" />
+
+			<ImageView
+					android:id="@+id/img11"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/text__"
+					android:layout_margin="20dp"
+					android:src="@drawable/ic_arrow" />
+
+			<Button
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/text__"
+					android:layout_toRightOf="@id/img11"
+					android:text="Take Photo" />
+		</RelativeLayout>
+
+
+	</LinearLayout>
+
+	<Button
+			android:id="@+id/Btn"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="32dp"
+			android:backgroundTint="@color/colorAccent"
+			android:padding="15dp"
+			android:text="Submit"
+			android:textColor="@color/white"
+			android:textSize="20sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
