@@ -56,7 +56,7 @@ public class LiveLocationService extends Service {
                     LinkedHashMap<String, String> message = getNewLocationMessage(location.getLatitude(), location.getLongitude());
                     pubnub.publish()
                             .message(message)
-                            .channel("Service 1")
+                            .channel("Service 2")
                             .async(new PNCallback<PNPublishResult>() {
                                 @Override
                                 public void onResponse(PNPublishResult result, PNStatus status) {
