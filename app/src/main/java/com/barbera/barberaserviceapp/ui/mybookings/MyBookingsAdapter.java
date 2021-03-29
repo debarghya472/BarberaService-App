@@ -20,6 +20,7 @@ import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
+import com.barbera.barberaserviceapp.ui.service.ImageVerifyActivity;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -103,7 +104,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
         holder.start.setOnClickListener(v -> {
             counterId = bookingItem.getId();
-            Intent intent = new Intent(context, ServiceActivity.class);
+            Intent intent = new Intent(context, ImageVerifyActivity.class);
             intent.putExtra("name",bookingItem.getName());
             intent.putExtra("service",bookingItem.getService());
             intent.putExtra("time",bookingItem.getTime());
