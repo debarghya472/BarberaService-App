@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
@@ -34,6 +35,7 @@ public class ServiceDetails extends AppCompatActivity {
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
     private String name,number,address,aadhar,pan;
+    private ImageView img1,img2,img3;
     Bitmap rc= VehicleDetails.rc_bitmap;
     Bitmap license= VehicleDetails.lic_bitmap;
     @Override
@@ -44,14 +46,26 @@ public class ServiceDetails extends AppCompatActivity {
         personal_documents=(CardView) findViewById(R.id.ppd);
         vehicle_details=(CardView) findViewById(R.id.vd);
         submit=(Button) findViewById(R.id.Btn);
+        img1=findViewById(R.id.image);
+        img2=findViewById(R.id.image2);
+        img3=findViewById(R.id.image3);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
         boolean ver1 = preferences.getBoolean("personal_det",false);
+        if(ver1){
+            img1.setVisibility(View.VISIBLE);
+        }
         boolean ver2 = preferences.getBoolean("personal_doc",false);
+        if(ver2){
+            img2.setVisibility(View.VISIBLE);
+        }
         boolean ver3 = preferences.getBoolean("vehicle_det",false);
+        if(ver3){
+            img3.setVisibility(View.VISIBLE);
+        }
         name = preferences.getString("name",null);
         number = preferences.getString("number",null);
         address = preferences.getString("address",null);
