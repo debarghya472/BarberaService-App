@@ -56,6 +56,7 @@
 				android:layout_height="wrap_content"
 				android:layout_margin="16dp"
 				android:hint="Aadhar Card No."
+				android:inputType="number"
 				android:backgroundTint="#000000"/>
 
 		<EditText

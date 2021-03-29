@@ -26,9 +26,9 @@ import static com.barbera.barberaserviceapp.LiveLocationService.person;
 
 public class VehicleDetails extends AppCompatActivity {
     private Button rc,license,submit;
-    private Bitmap rc_bitmap,lic_bitmap;
     private Uri filePath;
     public static final int RequestPermissionCode = 1;
+    public static Bitmap rc_bitmap, lic_bitmap;
     private ImageView rc_image,lic_image;
 
     @Override
@@ -71,8 +71,6 @@ public class VehicleDetails extends AppCompatActivity {
                     editor.putBoolean("vehicle_det",true);
                     editor.apply();
                     Intent intent = new Intent(VehicleDetails.this,ServiceDetails.class);
-                    intent.putExtra("license",lic_bitmap);
-                    intent.putExtra("rc",rc_bitmap);
                     startActivity(intent);
                 }
             }

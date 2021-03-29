@@ -44,11 +44,11 @@ public class PersonalDetails extends AppCompatActivity {
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putBoolean("personal_det",true);
+                    editor.putString("name",nm);
+                    editor.putString("number",num);
+                    editor.putString("address",add);
                     editor.apply();
                     Intent intent = new Intent(PersonalDetails.this,ServiceDetails.class);
-                    intent.putExtra("name",nm);
-                    intent.putExtra("number",num);
-                    intent.putExtra("address",add);
                     startActivity(intent);
                 }
             }

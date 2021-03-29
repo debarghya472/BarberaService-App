@@ -65,6 +65,7 @@
 				android:layout_below="@id/name"
 				android:layout_margin="16dp"
 				android:backgroundTint="#CACACA"
+				android:inputType="number"
 				android:hint="Mobile no." />
 
 		<EditText
