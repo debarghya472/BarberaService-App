@@ -51,7 +51,7 @@
 			app:layout_constraintTop_toBottomOf="@+id/profile_card_section">
 
 		<EditText
-				android:id="@+id/addhar"
+				android:id="@+id/aadhar"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="16dp"
@@ -59,8 +59,8 @@
 				android:backgroundTint="#000000"/>
 
 		<EditText
-				android:id="@+id/add"
-				android:layout_below="@id/addhar"
+				android:id="@+id/pan"
+				android:layout_below="@id/aadhar"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:layout_margin="16dp"
@@ -72,7 +72,7 @@
 	</RelativeLayout>
 
 	<Button
-			android:id="@+id/Btn"
+			android:id="@+id/Btn2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="32dp"

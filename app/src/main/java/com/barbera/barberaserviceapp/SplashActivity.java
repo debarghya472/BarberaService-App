@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.barbera.barberaserviceapp.ui.login.LoginActivity;
+import com.barbera.barberaserviceapp.ui.servicedetails.ServiceDetails;
 
 public class SplashActivity extends AppCompatActivity {
 

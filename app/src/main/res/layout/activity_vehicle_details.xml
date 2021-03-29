@@ -70,9 +70,10 @@
 					android:layout_height="wrap_content"
 					android:layout_below="@id/text_"
 					android:layout_margin="20dp"
-					android:src="@drawable/ic_arrow" />
+					 />
 
 			<Button
+					android:id="@+id/license"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/text_"
@@ -98,9 +99,10 @@
 					android:layout_height="wrap_content"
 					android:layout_below="@id/text__"
 					android:layout_margin="20dp"
-					android:src="@drawable/ic_arrow" />
+					 />
 
 			<Button
+					android:id="@+id/rc"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_below="@id/text__"
@@ -112,7 +114,7 @@
 	</LinearLayout>
 
 	<Button
-			android:id="@+id/Btn"
+			android:id="@+id/Btn3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="32dp"

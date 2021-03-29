@@ -81,7 +81,7 @@
 	</RelativeLayout>
 
 	<Button
-			android:id="@+id/Btn"
+			android:id="@+id/Btn1"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="32dp"
