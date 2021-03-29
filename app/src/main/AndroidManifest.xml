@@ -16,7 +16,8 @@
 			android:roundIcon="@mipmap/ic_launcher_round"
 			android:supportsRtl="true"
 			android:theme="@style/AppTheme">
-		<activity android:name=".ui.servicedetails.PersonalDocuments"></activity>
+		<activity android:name=".ui.servicedetails.VehicleDetails"></activity>
+		<activity android:name=".ui.servicedetails.PersonalDocuments" />
 		<activity android:name=".ui.servicedetails.PersonalDetails" />
 		<activity android:name=".ui.servicedetails.ServiceDetails" />
 		<activity android:name=".ui.service.ImageVerifyActivity" />
