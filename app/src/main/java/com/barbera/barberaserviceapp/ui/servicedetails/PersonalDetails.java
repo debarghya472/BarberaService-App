@@ -14,7 +14,7 @@ import com.barbera.barberaserviceapp.R;
 
 public class PersonalDetails extends AppCompatActivity {
     private EditText name,number,address;
-    private Button submit;
+    private Button next;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class PersonalDetails extends AppCompatActivity {
         name=(EditText) findViewById(R.id.name);
         number=(EditText) findViewById(R.id.contact1);
         address=(EditText) findViewById(R.id.add);
-        submit=(Button) findViewById(R.id.Btn1);
+        next=findViewById(R.id.Btn2);
 
         Intent intent = getIntent();
         String name1 = intent.getStringExtra("name");
@@ -36,7 +36,7 @@ public class PersonalDetails extends AppCompatActivity {
             address.setText(add1);
         }
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String nm = name.getText().toString();
@@ -54,12 +54,11 @@ public class PersonalDetails extends AppCompatActivity {
                 else{
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
-                    editor.putBoolean("personal_det",true);
                     editor.putString("name",nm);
                     editor.putString("number",num);
                     editor.putString("address",add);
                     editor.apply();
-                    Intent intent = new Intent(PersonalDetails.this,ServiceDetails.class);
+                    Intent intent = new Intent(PersonalDetails.this,PersonalDocuments.class);
                     startActivity(intent);
                 }
             }

@@ -25,11 +25,11 @@ import java.io.ByteArrayOutputStream;
 import static com.barbera.barberaserviceapp.LiveLocationService.person;
 
 public class VehicleDetails extends AppCompatActivity {
-    private Button rc,license,submit;
+    private Button rc,license,submit,prev,next;
     private Uri filePath;
-    public static final int RequestPermissionCode = 1;
     public static Bitmap rc_bitmap, lic_bitmap;
     private ImageView rc_image,lic_image;
+    private String aadhar,pan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,14 @@ public class VehicleDetails extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_details);
         rc=(Button) findViewById(R.id.rc);
         license=findViewById(R.id.license);
-        submit=findViewById(R.id.Btn3);
         rc_image=findViewById(R.id.img11);
         lic_image=findViewById(R.id.img1);
+        prev=findViewById(R.id.Btn3);
+        next=findViewById(R.id.Btn2);
+
+        SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
+        aadhar = preferences.getString("aadhar",null);
+        pan = preferences.getString("pan",null);
 
         EnableRuntimePermission();
         license.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +61,7 @@ public class VehicleDetails extends AppCompatActivity {
                 startActivityForResult(intent, 8);
             }
         });
-        submit.setOnClickListener(new View.OnClickListener() {
+        next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(rc_image.getDrawable()==null){
@@ -68,11 +73,19 @@ public class VehicleDetails extends AppCompatActivity {
                 else{
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
-                    editor.putBoolean("vehicle_det",true);
                     editor.apply();
                     Intent intent = new Intent(VehicleDetails.this,ServiceDetails.class);
                     startActivity(intent);
                 }
+            }
+        });
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(VehicleDetails.this,PersonalDocuments.class);
+                intent.putExtra("aadhar",aadhar);
+                intent.putExtra("pan",pan);
+                startActivity(intent);
             }
         });
     }
@@ -97,13 +110,13 @@ public class VehicleDetails extends AppCompatActivity {
             Toast.makeText(VehicleDetails.this,"CAMERA permission allows us to Access CAMERA app",     Toast.LENGTH_LONG).show();
         } else {
             ActivityCompat.requestPermissions(VehicleDetails.this,new String[]{
-                    Manifest.permission.CAMERA}, RequestPermissionCode);
+                    Manifest.permission.CAMERA}, Payments.RequestPermissionCode);
         }
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] result) {
         switch (requestCode) {
-            case RequestPermissionCode:
+            case Payments.RequestPermissionCode:
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(VehicleDetails.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
                 } else {
