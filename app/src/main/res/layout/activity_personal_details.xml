@@ -4,7 +4,7 @@
 		xmlns:tools="http://schemas.android.com/tools"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		tools:context=".ui.servicedetails.ServiceDetails">
+		tools:context=".ui.servicedetails.PersonalDetails">
 
 	<ImageView
 		android:id="@+id/profile_card_section"
