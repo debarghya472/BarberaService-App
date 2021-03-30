@@ -12,13 +12,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
 
 public class PersonalDocuments extends AppCompatActivity {
     private EditText aadhar,pan;
-    private Button up_aad,up_pan,next,prev,photo;
+    private Button next,prev;
+    private ImageButton up_aad,up_pan,photo;
     public static Bitmap aad_bitmap,pan_bitmap,photo_bitmap;
     private String name,number,address,gender;
 
@@ -26,11 +28,13 @@ public class PersonalDocuments extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_documents);
-        aadhar=(EditText) findViewById(R.id.aadhar);
-        pan = (EditText) findViewById(R.id.pan);
-        up_aad = findViewById(R.id.up);
+        aadhar=(EditText) findViewById(R.id.aadharInp1);
+        pan = (EditText) findViewById(R.id.panInp1);
+        up_aad = findViewById(R.id.aadharUp);
+        up_pan=findViewById(R.id.panUp);
         next= findViewById(R.id.Btn2);
         prev= findViewById(R.id.Btn3);
+        photo=findViewById(R.id.photoUp);
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
         name = preferences.getString("name",null);
@@ -101,6 +105,7 @@ public class PersonalDocuments extends AppCompatActivity {
                 intent1.putExtra("name",name);
                 intent1.putExtra("number",number);
                 intent1.putExtra("address",address);
+                intent1.putExtra("gender",gender);
                 startActivity(intent1);
             }
         });

@@ -37,7 +37,7 @@ public class Payments extends AppCompatActivity {
     private Bitmap payment;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
-    private String name,number,address,aadhar,pan,gender;
+    private String name,number,address,aadhar,pan,gender,lic_no;
     public static final int RequestPermissionCode = 1;
 
     @Override
@@ -60,11 +60,13 @@ public class Payments extends AppCompatActivity {
         aadhar = preferences.getString("aadhar",null);
         pan = preferences.getString("pan",null);
         gender = preferences.getString("gender",null);
+        lic_no=preferences.getString("license_no",null);
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Payments.this,VehicleDetails.class);
+                intent.putExtra("lic_no",lic_no);
                 startActivity(intent);
             }
         });

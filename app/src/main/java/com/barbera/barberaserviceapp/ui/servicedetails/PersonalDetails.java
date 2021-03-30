@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
 
+import retrofit2.http.HEAD;
+
 public class PersonalDetails extends AppCompatActivity {
     private EditText name,number,address;
     private Button next;
@@ -25,6 +27,7 @@ public class PersonalDetails extends AppCompatActivity {
         name=(EditText) findViewById(R.id.name);
         number=(EditText) findViewById(R.id.contact1);
         address=(EditText) findViewById(R.id.add);
+
         next=findViewById(R.id.Btn2);
         male = findViewById(R.id.male);
         female = findViewById(R.id.female);
@@ -33,11 +36,20 @@ public class PersonalDetails extends AppCompatActivity {
         String name1 = intent.getStringExtra("name");
         String num1 = intent.getStringExtra("number");
         String add1 = intent.getStringExtra("address");
+        String gender = intent.getStringExtra("gender");
 
         if(name1!=null){
             name.setText(name1);
             number.setText(num1);
             address.setText(add1);
+            if(gender.equals("Male")){
+                male.setChecked(true);
+                female.setChecked(false);
+            }
+            else{
+                male.setChecked(false);
+                female.setChecked(true);
+            }
         }
         if(male.isChecked()){
             female.setChecked(false);
@@ -65,7 +77,6 @@ public class PersonalDetails extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please enter a valid mobile number",Toast.LENGTH_SHORT).show();
                 }
                 else{
-
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("name",nm);

@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -25,28 +27,36 @@ import java.io.ByteArrayOutputStream;
 import static com.barbera.barberaserviceapp.LiveLocationService.person;
 
 public class VehicleDetails extends AppCompatActivity {
-    private Button rc,license,submit,prev,next;
+    private Button prev,next;
+    private ImageButton rc,license;
     private Uri filePath;
     public static Bitmap rc_bitmap, lic_bitmap;
-    private ImageView rc_image,lic_image;
     private String aadhar,pan;
+    private EditText licNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_details);
-        rc=(Button) findViewById(R.id.rc);
-        license=findViewById(R.id.license);
-        rc_image=findViewById(R.id.img11);
-        lic_image=findViewById(R.id.img1);
+        rc=findViewById(R.id.rcUp);
+        license=findViewById(R.id.licUp);
         prev=findViewById(R.id.Btn3);
         next=findViewById(R.id.Btn2);
+        licNo=findViewById(R.id.licInp);
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
         aadhar = preferences.getString("aadhar",null);
         pan = preferences.getString("pan",null);
 
         EnableRuntimePermission();
+
+        Intent intent = getIntent();
+        String lic_no = intent.getStringExtra("lic_no");
+
+        if(lic_no!=null){
+            licNo.setText(lic_no);
+        }
+
         license.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,15 +74,20 @@ public class VehicleDetails extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String lic = licNo.getText().toString();
                 if(rc_image.getDrawable()==null){
                     Toast.makeText(getApplicationContext(),"Please enter your RC image",Toast.LENGTH_SHORT).show();
                 }
                 else if(lic_image.getDrawable()==null){
                     Toast.makeText(getApplicationContext(),"Please enter your Driving license image",Toast.LENGTH_SHORT).show();
                 }
+                else if(lic.isEmpty()){
+                    Toast.makeText(getApplicationContext(),"Please enter your Driving license number",Toast.LENGTH_SHORT).show();
+                }
                 else{
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
+                    editor.putString("license_no",lic);
                     editor.apply();
                     Intent intent = new Intent(VehicleDetails.this,ServiceDetails.class);
                     startActivity(intent);
@@ -94,12 +109,10 @@ public class VehicleDetails extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK) {
             lic_bitmap = (Bitmap) data.getExtras().get("data");
-            lic_image.setImageBitmap(lic_bitmap);
             filePath = data.getData();
         }
         if (requestCode == 8 && resultCode == RESULT_OK) {
             rc_bitmap = (Bitmap) data.getExtras().get("data");
-            rc_image.setImageBitmap(rc_bitmap);
             filePath = data.getData();
         }
     }
