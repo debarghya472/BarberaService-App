@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import android.os.Handler;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,8 +14,7 @@ import androidx.cardview.widget.CardView;
 import com.barbera.barberaserviceapp.MainActivity;
 import com.barbera.barberaserviceapp.R;
 
-import com.barbera.barberaserviceapp.SplashActivity;
-import com.barbera.barberaserviceapp.ui.servicedetails.ServiceDetails;
+import com.barbera.barberaserviceapp.ui.servicedetails.PersonalDetails;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginActivity extends AppCompatActivity {
@@ -104,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void sendToServiceDetails(){
-        Intent intent = new Intent(LoginActivity.this, ServiceDetails.class);
+        Intent intent = new Intent(LoginActivity.this, PersonalDetails.class);
         startActivity(intent);
     }
 }

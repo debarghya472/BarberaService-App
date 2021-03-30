@@ -23,7 +23,7 @@ public class PersonalDocuments extends AppCompatActivity {
     private Button next,prev;
     private ImageButton up_aad,up_pan,photo;
     public static Bitmap aad_bitmap,pan_bitmap,photo_bitmap;
-    private String name,number,address,gender;
+    private String aadh1,pan1;
     private ImageView img1,img2,img3;
     private boolean check1=false,check2=false,check3=false;
 
@@ -43,17 +43,8 @@ public class PersonalDocuments extends AppCompatActivity {
         img3=findViewById(R.id.img3);
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
-        name = preferences.getString("name",null);
-        number = preferences.getString("number",null);
-        address = preferences.getString("address",null);
-        gender = preferences.getString("gender",null);
-
-        EnableRuntimePermission();
-
-        Intent intent = getIntent();
-        String aadh1 = intent.getStringExtra("aadhar");
-        String pan1 = intent.getStringExtra("pan");
-
+        aadh1 = preferences.getString("aadhar",null);
+        pan1 = preferences.getString("pan",null);
         if(aadh1!=null){
             aadhar.setText(aadh1);
             pan.setText(pan1);
@@ -62,18 +53,19 @@ public class PersonalDocuments extends AppCompatActivity {
             img3.setVisibility(View.VISIBLE);
         }
 
+        EnableRuntimePermission();
         up_aad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 7);
+                startActivityForResult(intent, 6);
             }
         });
         up_pan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 8);
+                startActivityForResult(intent, 5);
             }
         });
 
@@ -81,7 +73,7 @@ public class PersonalDocuments extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent, 9);
+                startActivityForResult(intent, 4);
             }
         });
 
@@ -120,10 +112,6 @@ public class PersonalDocuments extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent1= new Intent(PersonalDocuments.this,PersonalDetails.class);
-                intent1.putExtra("name",name);
-                intent1.putExtra("number",number);
-                intent1.putExtra("address",address);
-                intent1.putExtra("gender",gender);
                 startActivity(intent1);
             }
         });
@@ -132,17 +120,17 @@ public class PersonalDocuments extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 7 && resultCode == RESULT_OK) {
+        if (requestCode == 4 && resultCode == RESULT_OK) {
             aad_bitmap = (Bitmap) data.getExtras().get("data");
             img1.setVisibility(View.VISIBLE);
             check1=true;
         }
-        if (requestCode == 8 && resultCode == RESULT_OK) {
+        if (requestCode == 5 && resultCode == RESULT_OK) {
             pan_bitmap = (Bitmap) data.getExtras().get("data");
             img2.setVisibility(View.VISIBLE);
             check2=true;
         }
-        if (requestCode == 9 && resultCode == RESULT_OK) {
+        if (requestCode == 6 && resultCode == RESULT_OK) {
             photo_bitmap = (Bitmap) data.getExtras().get("data");
             img3.setVisibility(View.VISIBLE);
             check3=true;

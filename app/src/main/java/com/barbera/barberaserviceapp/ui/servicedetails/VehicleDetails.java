@@ -31,7 +31,7 @@ public class VehicleDetails extends AppCompatActivity {
     private ImageButton rc,license;
     private Uri filePath;
     public static Bitmap rc_bitmap, lic_bitmap;
-    private String aadhar,pan;
+    private String license_no;
     private EditText licNo;
     private ImageView img4,img5;
     private boolean check4=false,check5=false;
@@ -49,16 +49,11 @@ public class VehicleDetails extends AppCompatActivity {
         img5=findViewById(R.id.img5);
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
-        aadhar = preferences.getString("aadhar",null);
-        pan = preferences.getString("pan",null);
+        license_no=preferences.getString("license_no",null);
 
-        EnableRuntimePermission();
 
-        Intent intent = getIntent();
-        String lic_no = intent.getStringExtra("lic_no");
-
-        if(lic_no!=null){
-            licNo.setText(lic_no);
+        if(license_no!=null){
+            licNo.setText(license_no);
             img4.setVisibility(View.VISIBLE);
             img5.setVisibility(View.VISIBLE);
         }
@@ -104,8 +99,6 @@ public class VehicleDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(VehicleDetails.this,PersonalDocuments.class);
-                intent.putExtra("aadhar",aadhar);
-                intent.putExtra("pan",pan);
                 startActivity(intent);
             }
         });

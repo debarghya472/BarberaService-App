@@ -72,7 +72,6 @@ public class Payments extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Payments.this,VehicleDetails.class);
-                intent.putExtra("lic_no",lic_no);
                 startActivity(intent);
             }
         });

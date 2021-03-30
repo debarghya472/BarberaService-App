@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ public class PersonalDetails extends AppCompatActivity {
     private EditText name,number,address;
     private Button next;
     private CheckBox male,female;
+    private String name1,number1,address1,gender1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,17 @@ public class PersonalDetails extends AppCompatActivity {
         male = findViewById(R.id.male);
         female = findViewById(R.id.female);
 
-        Intent intent = getIntent();
-        String name1 = intent.getStringExtra("name");
-        String num1 = intent.getStringExtra("number");
-        String add1 = intent.getStringExtra("address");
-        String gender = intent.getStringExtra("gender");
+        SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
+        name1=preferences.getString("name",null);
+        number1=preferences.getString("number",null);
+        address1=preferences.getString("address",null);
+        gender1=preferences.getString("gender",null);
 
         if(name1!=null){
             name.setText(name1);
-            number.setText(num1);
-            address.setText(add1);
-            if(gender.equals("Male")){
+            number.setText(number1);
+            address.setText(address1);
+            if(gender1.equals("Male")){
                 male.setChecked(true);
                 female.setChecked(false);
             }
@@ -51,12 +53,22 @@ public class PersonalDetails extends AppCompatActivity {
                 female.setChecked(true);
             }
         }
-        if(male.isChecked()){
-            female.setChecked(false);
-        }
-        if(female.isChecked()){
-            male.setChecked(false);
-        }
+        male.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()){
+                    female.setChecked(false);
+                }
+            }
+        });
+        female.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(buttonView.isChecked()){
+                    male.setChecked(false);
+                }
+            }
+        });
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

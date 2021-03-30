@@ -20,7 +20,6 @@
 		<activity android:name=".ui.servicedetails.VehicleDetails" />
 		<activity android:name=".ui.servicedetails.PersonalDocuments" />
 		<activity android:name=".ui.servicedetails.PersonalDetails" />
-		<activity android:name=".ui.servicedetails.ServiceDetails" />
 		<activity android:name=".ui.service.ImageVerifyActivity" />
 		<activity
 				android:name=".ui.service.ServiceActivity"
