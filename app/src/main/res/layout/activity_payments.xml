@@ -43,71 +43,72 @@
 				android:textColor="@color/CardWhite" />
 	</RelativeLayout>
 
-	<RelativeLayout
+	<LinearLayout
+			android:orientation="vertical"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toBottomOf="@+id/profile_card_section">
 
-		<EditText
-				android:id="@+id/aadhar"
+		<RelativeLayout
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_margin="16dp"
-				android:backgroundTint="#000000"
-				android:hint="Aadhar Card No."
-				android:inputType="number" />
+				android:layout_height="match_parent">
 
-		<ImageView
-				android:id="@+id/aadharPhoto"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/aadhar"
-				android:layout_centerInParent="true"
-				android:src="@drawable/ic_arrow" />
+			<TextView
+					android:id="@+id/text_"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_margin="20dp"
+					android:text="Upload Payment receipt"
+					android:textColor="@color/colorAccent"
+					android:textSize="20sp" />
 
-		<Button
-				android:id="@+id/up"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/aadharPhoto"
-				android:layout_centerInParent="true"
-				android:text="Upload Aadhar Photo" />
+			<ImageView
+					android:id="@+id/img1"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/text_"
+					android:layout_margin="20dp"
+					/>
 
-
-		<EditText
-				android:id="@+id/pan"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_below="@id/up"
-				android:layout_margin="16dp"
-				android:backgroundTint="#000000"
-				android:hint="Pan Card No." />
+			<Button
+					android:id="@+id/license"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_below="@id/text_"
+					android:layout_toEndOf="@id/img1"
+					android:text="Take Photo" />
+		</RelativeLayout>
 
 
-	</RelativeLayout>
+	</LinearLayout>
+
 	<Button
 			android:id="@+id/Btn3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginStart="16dp"
 			android:layout_marginBottom="32dp"
+			android:backgroundTint="@color/colorAccent"
 			android:padding="15dp"
-			android:text="Previous"
+			android:text="Submit"
+			android:textColor="@color/white"
+			android:textSize="20sp"
 			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent" />
 
 	<Button
-			android:id="@+id/Btn2"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:layout_marginEnd="16dp"
-			android:layout_marginBottom="32dp"
+			android:layout_marginStart="16dp"
+			android:textSize="14sp"
 			android:padding="15dp"
-			android:text="Next"
+			android:text="previous"
+			android:layout_marginBottom="32dp"
 			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent" />
+			app:layout_constraintStart_toStartOf="parent" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -65,35 +65,60 @@
 				android:layout_below="@id/name"
 				android:layout_margin="16dp"
 				android:backgroundTint="#CACACA"
-				android:inputType="number"
-				android:hint="Mobile no." />
+				android:hint="Mobile no."
+				android:inputType="number" />
 
 		<EditText
 				android:id="@+id/add"
-				android:layout_below="@id/contact1"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:layout_below="@id/contact1"
 				android:layout_margin="16dp"
-				android:hint="Address"
-				android:backgroundTint="#CACACA"/>
+				android:backgroundTint="#CACACA"
+				android:hint="Address" />
 
+		<ImageView
+				android:id="@+id/profileImg"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/add"
+				android:layout_centerInParent="true"
+				android:layout_margin="12dp"
+				android:src="@drawable/ic_arrow" />
+
+		<Button
+				android:id="@+id/upload_photo"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@id/profileImg"
+				android:layout_centerInParent="true"
+				android:layout_margin="12dp"
+				android:text="Upload Photo" />
 
 
 	</RelativeLayout>
 
 	<Button
-			android:id="@+id/Btn1"
+			android:id="@+id/Btn3"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
+			android:layout_marginStart="16dp"
 			android:layout_marginBottom="32dp"
-			android:backgroundTint="@color/colorAccent"
 			android:padding="15dp"
-			android:text="Submit"
-			android:textColor="@color/white"
-			android:textSize="20sp"
+			android:text="Previous"
 			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent" />
+
+	<Button
+			android:id="@+id/Btn2"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="32dp"
+			android:padding="15dp"
+			android:text="Next"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
