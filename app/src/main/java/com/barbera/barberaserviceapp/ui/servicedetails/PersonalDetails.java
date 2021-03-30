@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.barbera.barberaserviceapp.R;
 public class PersonalDetails extends AppCompatActivity {
     private EditText name,number,address;
     private Button next;
+    private CheckBox male,female;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,8 @@ public class PersonalDetails extends AppCompatActivity {
         number=(EditText) findViewById(R.id.contact1);
         address=(EditText) findViewById(R.id.add);
         next=findViewById(R.id.Btn2);
+        male = findViewById(R.id.male);
+        female = findViewById(R.id.female);
 
         Intent intent = getIntent();
         String name1 = intent.getStringExtra("name");
@@ -35,6 +39,12 @@ public class PersonalDetails extends AppCompatActivity {
             number.setText(num1);
             address.setText(add1);
         }
+        if(male.isChecked()){
+            female.setChecked(false);
+        }
+        if(female.isChecked()){
+            male.setChecked(false);
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +52,9 @@ public class PersonalDetails extends AppCompatActivity {
                 String nm = name.getText().toString();
                 String num = number.getText().toString();
                 String add = address.getText().toString();
+                if(!(male.isChecked() || female.isChecked())){
+                    Toast.makeText(getApplicationContext(),"Please select your gender",Toast.LENGTH_SHORT).show();
+                }
                 if(nm.isEmpty()){
                     Toast.makeText(getApplicationContext(),"Please enter your name",Toast.LENGTH_SHORT).show();
                 }
@@ -52,11 +65,18 @@ public class PersonalDetails extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please enter a valid mobile number",Toast.LENGTH_SHORT).show();
                 }
                 else{
+
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("name",nm);
                     editor.putString("number",num);
                     editor.putString("address",add);
+                    if(male.isChecked()){
+                        editor.putString("gender","Male");
+                    }
+                    else{
+                        editor.putString("gender","Female");
+                    }
                     editor.apply();
                     Intent intent = new Intent(PersonalDetails.this,PersonalDocuments.class);
                     startActivity(intent);

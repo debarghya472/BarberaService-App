@@ -20,7 +20,7 @@ public class PersonalDocuments extends AppCompatActivity {
     private EditText aadhar,pan;
     private Button up_aad,up_pan,next,prev,photo;
     public static Bitmap aad_bitmap,pan_bitmap,photo_bitmap;
-    private String name,number,address;
+    private String name,number,address,gender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,7 @@ public class PersonalDocuments extends AppCompatActivity {
         name = preferences.getString("name",null);
         number = preferences.getString("number",null);
         address = preferences.getString("address",null);
+        gender = preferences.getString("gender",null);
 
         EnableRuntimePermission();
 

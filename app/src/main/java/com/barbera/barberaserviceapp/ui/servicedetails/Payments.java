@@ -37,7 +37,7 @@ public class Payments extends AppCompatActivity {
     private Bitmap payment;
     private FirebaseStorage firebaseStorage;
     private StorageReference storageReference;
-    private String name,number,address,aadhar,pan;
+    private String name,number,address,aadhar,pan,gender;
     public static final int RequestPermissionCode = 1;
 
     @Override
@@ -59,6 +59,7 @@ public class Payments extends AppCompatActivity {
         address = preferences.getString("address",null);
         aadhar = preferences.getString("aadhar",null);
         pan = preferences.getString("pan",null);
+        gender = preferences.getString("gender",null);
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +89,7 @@ public class Payments extends AppCompatActivity {
                 mp.put("address",address);
                 mp.put("aadhar",aadhar);
                 mp.put("pan",pan);
+                mp.put("gender",gender);
                 String id = FirebaseFirestore.getInstance().collection("Barber details").document().getId();
                 FirebaseFirestore.getInstance().collection("Barber details").document(id).set(mp)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
