@@ -33,6 +33,8 @@ public class VehicleDetails extends AppCompatActivity {
     public static Bitmap rc_bitmap, lic_bitmap;
     private String aadhar,pan;
     private EditText licNo;
+    private ImageView img4,img5;
+    private boolean check4=false,check5=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class VehicleDetails extends AppCompatActivity {
         prev=findViewById(R.id.Btn3);
         next=findViewById(R.id.Btn2);
         licNo=findViewById(R.id.licInp);
+        img4=findViewById(R.id.img4);
+        img5=findViewById(R.id.img5);
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
         aadhar = preferences.getString("aadhar",null);
@@ -55,6 +59,8 @@ public class VehicleDetails extends AppCompatActivity {
 
         if(lic_no!=null){
             licNo.setText(lic_no);
+            img4.setVisibility(View.VISIBLE);
+            img5.setVisibility(View.VISIBLE);
         }
 
         license.setOnClickListener(new View.OnClickListener() {
@@ -75,11 +81,11 @@ public class VehicleDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String lic = licNo.getText().toString();
-                if(rc_image.getDrawable()==null){
-                    Toast.makeText(getApplicationContext(),"Please enter your RC image",Toast.LENGTH_SHORT).show();
+                if(!check5){
+                    Toast.makeText(getApplicationContext(),"Please enter your RC photo",Toast.LENGTH_SHORT).show();
                 }
-                else if(lic_image.getDrawable()==null){
-                    Toast.makeText(getApplicationContext(),"Please enter your Driving license image",Toast.LENGTH_SHORT).show();
+                else if(!check4){
+                    Toast.makeText(getApplicationContext(),"Please enter your Driving license photo",Toast.LENGTH_SHORT).show();
                 }
                 else if(lic.isEmpty()){
                     Toast.makeText(getApplicationContext(),"Please enter your Driving license number",Toast.LENGTH_SHORT).show();
@@ -89,7 +95,7 @@ public class VehicleDetails extends AppCompatActivity {
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("license_no",lic);
                     editor.apply();
-                    Intent intent = new Intent(VehicleDetails.this,ServiceDetails.class);
+                    Intent intent = new Intent(VehicleDetails.this,Payments.class);
                     startActivity(intent);
                 }
             }
@@ -109,11 +115,15 @@ public class VehicleDetails extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK) {
             lic_bitmap = (Bitmap) data.getExtras().get("data");
+            img5.setVisibility(View.VISIBLE);
             filePath = data.getData();
+            check4=true;
         }
         if (requestCode == 8 && resultCode == RESULT_OK) {
             rc_bitmap = (Bitmap) data.getExtras().get("data");
             filePath = data.getData();
+            img4.setVisibility(View.VISIBLE);
+            check5=true;
         }
     }
 

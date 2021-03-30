@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
@@ -27,7 +29,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Payments extends AppCompatActivity {
-    private Button pay,prev,submit;
+    private Button prev,submit;
+    private ImageButton pay;
+    private ImageView img6;
+    private boolean check6=false;
     private Uri filePath;
     Bitmap rc= VehicleDetails.rc_bitmap;
     Bitmap license= VehicleDetails.lic_bitmap;
@@ -46,8 +51,9 @@ public class Payments extends AppCompatActivity {
         setContentView(R.layout.activity_payments);
 
         prev = findViewById(R.id.prev);
-        pay= findViewById(R.id.payment);
+        pay= findViewById(R.id.receiptUp);
         submit=findViewById(R.id.submit);
+        img6=findViewById(R.id.img6);
 
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
@@ -80,32 +86,40 @@ public class Payments extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImageToFirebase(rc,"_rc");
-                uploadImageToFirebase(license,"_lic");
-                uploadImageToFirebase(aad,"_aadhar");
-                uploadImageToFirebase(pn,"_pan");
-                uploadImageToFirebase(photo,"_photo");
-                Map<String,Object> mp = new HashMap<>();
-                mp.put("name",name);
-                mp.put("number",number);
-                mp.put("address",address);
-                mp.put("aadhar",aadhar);
-                mp.put("pan",pan);
-                mp.put("gender",gender);
-                String id = FirebaseFirestore.getInstance().collection("Barber details").document().getId();
-                FirebaseFirestore.getInstance().collection("Barber details").document(id).set(mp)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(Payments.this, LoginActivity.class);
-                                SharedPreferences sharedPreferences = getSharedPreferences("Details",MODE_PRIVATE);
-                                SharedPreferences.Editor editor=sharedPreferences.edit();
-                                editor.putBoolean("details_conf",true);
-                                editor.apply();
-                                startActivity(intent);
-                            }
-                        });
+                if(!check6){
+                    Toast.makeText(getApplicationContext(),"Please enter your receipt photo",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    uploadImageToFirebase(rc,"_rc");
+                    uploadImageToFirebase(license,"_lic");
+                    uploadImageToFirebase(aad,"_aadhar");
+                    uploadImageToFirebase(pn,"_pan");
+                    uploadImageToFirebase(photo,"_photo");
+                    uploadImageToFirebase(payment,"_receipt");
+                    Map<String,Object> mp = new HashMap<>();
+                    mp.put("name",name);
+                    mp.put("number",number);
+                    mp.put("address",address);
+                    mp.put("aadhar",aadhar);
+                    mp.put("license_no",lic_no);
+                    mp.put("pan",pan);
+                    mp.put("gender",gender);
+                    String id = FirebaseFirestore.getInstance().collection("Barber details").document().getId();
+                    FirebaseFirestore.getInstance().collection("Barber details").document(id).set(mp)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(Payments.this, LoginActivity.class);
+                                    SharedPreferences sharedPreferences = getSharedPreferences("Details",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                                    editor.putBoolean("details_conf",true);
+                                    editor.apply();
+                                    startActivity(intent);
+                                }
+                            });
+                }
+
             }
         });
     }
@@ -141,6 +155,8 @@ public class Payments extends AppCompatActivity {
         if (requestCode == 7 && resultCode == RESULT_OK) {
             payment = (Bitmap) data.getExtras().get("data");
             filePath = data.getData();
+            img6.setVisibility(View.VISIBLE);
+            check6=true;
         }
     }
 

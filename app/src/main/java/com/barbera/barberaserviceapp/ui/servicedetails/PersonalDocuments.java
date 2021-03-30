@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.barbera.barberaserviceapp.R;
@@ -23,6 +24,8 @@ public class PersonalDocuments extends AppCompatActivity {
     private ImageButton up_aad,up_pan,photo;
     public static Bitmap aad_bitmap,pan_bitmap,photo_bitmap;
     private String name,number,address,gender;
+    private ImageView img1,img2,img3;
+    private boolean check1=false,check2=false,check3=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class PersonalDocuments extends AppCompatActivity {
         next= findViewById(R.id.Btn2);
         prev= findViewById(R.id.Btn3);
         photo=findViewById(R.id.photoUp);
+        img1=findViewById(R.id.img1);
+        img2=findViewById(R.id.img2);
+        img3=findViewById(R.id.img3);
 
         SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
         name = preferences.getString("name",null);
@@ -51,6 +57,9 @@ public class PersonalDocuments extends AppCompatActivity {
         if(aadh1!=null){
             aadhar.setText(aadh1);
             pan.setText(pan1);
+            img1.setVisibility(View.VISIBLE);
+            img2.setVisibility(View.VISIBLE);
+            img3.setVisibility(View.VISIBLE);
         }
 
         up_aad.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +96,22 @@ public class PersonalDocuments extends AppCompatActivity {
                 else if(pn.length()!=10){
                     Toast.makeText(getApplicationContext(),"Please enter valid pan no.",Toast.LENGTH_SHORT).show();
                 }
+                else if(!check1){
+                    Toast.makeText(getApplicationContext(),"Please enter your aadhar photo",Toast.LENGTH_SHORT).show();
+                }
+                else if(!check2){
+                    Toast.makeText(getApplicationContext(),"Please enter your pan photo",Toast.LENGTH_SHORT).show();
+                }
+                else if(!check3){
+                    Toast.makeText(getApplicationContext(),"Please enter your photo",Toast.LENGTH_SHORT).show();
+                }
                 else{
                     SharedPreferences preferences = getSharedPreferences("Details",MODE_PRIVATE);
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putString("aadhar",aad);
                     editor.putString("pan",pn);
                     editor.apply();
-                    Intent intent = new Intent(PersonalDocuments.this,ServiceDetails.class);
+                    Intent intent = new Intent(PersonalDocuments.this,VehicleDetails.class);
                     startActivity(intent);
                 }
             }
@@ -116,12 +134,18 @@ public class PersonalDocuments extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK) {
             aad_bitmap = (Bitmap) data.getExtras().get("data");
+            img1.setVisibility(View.VISIBLE);
+            check1=true;
         }
         if (requestCode == 8 && resultCode == RESULT_OK) {
             pan_bitmap = (Bitmap) data.getExtras().get("data");
+            img2.setVisibility(View.VISIBLE);
+            check2=true;
         }
         if (requestCode == 9 && resultCode == RESULT_OK) {
             photo_bitmap = (Bitmap) data.getExtras().get("data");
+            img3.setVisibility(View.VISIBLE);
+            check3=true;
         }
     }
 
