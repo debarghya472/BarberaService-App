@@ -48,9 +48,6 @@ public class PersonalDocuments extends AppCompatActivity {
         if(aadh1!=null){
             aadhar.setText(aadh1);
             pan.setText(pan1);
-            img1.setVisibility(View.VISIBLE);
-            img2.setVisibility(View.VISIBLE);
-            img3.setVisibility(View.VISIBLE);
         }
 
         EnableRuntimePermission();
@@ -146,6 +143,12 @@ public class PersonalDocuments extends AppCompatActivity {
                     Manifest.permission.CAMERA}, Payments.RequestPermissionCode);
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] result) {
         switch (requestCode) {
@@ -153,9 +156,12 @@ public class PersonalDocuments extends AppCompatActivity {
                 if (result.length > 0 && result[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(PersonalDocuments.this, "Permission Granted, Now your application can access CAMERA.", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(PersonalDocuments.this, "Permission Canceled, Now your application cannot access CAMERA.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(PersonalDocuments.this, "You must grant permission to use the app", Toast.LENGTH_LONG).show();
+                    ActivityCompat.requestPermissions(PersonalDocuments.this,new String[]{
+                            Manifest.permission.CAMERA}, Payments.RequestPermissionCode);
                 }
                 break;
         }
+
     }
 }
