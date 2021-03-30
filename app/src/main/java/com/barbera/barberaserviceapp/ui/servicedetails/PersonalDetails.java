@@ -23,7 +23,7 @@ public class PersonalDetails extends AppCompatActivity {
         name=(EditText) findViewById(R.id.name);
         number=(EditText) findViewById(R.id.contact1);
         address=(EditText) findViewById(R.id.add);
-        submit=(Button) findViewById(R.id.Btn1);
+        submit=(Button) findViewById(R.id.Btn2);
 
         Intent intent = getIntent();
         String name1 = intent.getStringExtra("name");
