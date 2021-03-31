@@ -72,6 +72,15 @@
 				android:textSize="20sp"
 				android:textStyle="bold" />
 
+		<EditText
+				android:id="@+id/licInp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="20dp"
+				android:layout_marginEnd="20dp"
+				android:backgroundTint="#000000"
+				android:hint="License Number" />
+
 
 		<androidx.constraintlayout.widget.ConstraintLayout
 				android:layout_width="match_parent"
@@ -82,31 +91,23 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_gravity="end"
+					android:layout_marginStart="18dp"
 					android:background="@drawable/upload"
-					app:layout_constraintEnd_toStartOf="@+id/img5"
+					app:layout_constraintStart_toStartOf="parent"
 					tools:ignore="MissingConstraints" />
 
 			<ImageView
 					android:id="@+id/img5"
 					android:layout_width="40dp"
 					android:layout_height="40dp"
-					android:layout_marginEnd="16dp"
+					android:layout_marginStart="16dp"
 					android:src="@drawable/green"
-					android:visibility="visible"
-					app:layout_constraintEnd_toEndOf="parent"
+					android:visibility="invisible"
+					app:layout_constraintStart_toEndOf="@+id/licUp"
 					tools:ignore="MissingConstraints" />
 
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
-
-		<EditText
-				android:id="@+id/licInp"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginStart="20dp"
-				android:layout_marginEnd="20dp"
-				android:backgroundTint="#000000"
-				android:hint="License Number" />
 	</LinearLayout>
 
 	<Button
