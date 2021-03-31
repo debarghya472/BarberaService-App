@@ -10,9 +10,19 @@
 			android:id="@+id/profile_card_section"
 			android:layout_width="match_parent"
 			android:layout_height="180dp"
-			android:src="@drawable/personal_documents"
+			android:src="@drawable/payment"
 			app:layout_constraintTop_toTopOf="parent">
 	</ImageView>
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/heading"
+		app:layout_constraintTop_toBottomOf="@+id/profile_card_section"
+		android:text="Payment Details"
+		android:gravity="center"
+		android:textColor="@color/colorAccent"
+		android:textSize="20sp"
+		android:textStyle="bold"/>
 
 	<LinearLayout
 			android:orientation="vertical"
@@ -20,7 +30,7 @@
 			android:layout_height="wrap_content"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/profile_card_section">
+			app:layout_constraintTop_toBottomOf="@+id/heading">
 		<TextView
 				android:id="@+id/s1"
 				android:layout_width="wrap_content"
@@ -32,31 +42,37 @@
 		<LinearLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:orientation="horizontal">
+				android:orientation="vertical">
 
 			<TextView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="26dp"
 					android:layout_marginTop="16dp"
-					android:text="Bank Receipt"
+					android:text="Payment Receipt"
 					android:textColor="@color/colorAccent"
 					android:textSize="20sp"
 					android:textStyle="bold" />
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
 
 			<ImageButton
 					android:id="@+id/receiptUp"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_margin="12dp"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="26dp"
+				android:layout_marginTop="16dp"
 					android:background="@drawable/upload" />
 			<ImageView
 				android:id="@+id/img6"
-					android:layout_margin="8dp"
-					android:layout_width="50dp"
-					android:layout_height="50dp"
-				android:visibility="gone"
+					android:layout_margin="10dp"
+					android:layout_width="40dp"
+					android:layout_height="40dp"
+				android:visibility="visible"
 				android:src="@drawable/green"/>
+			</LinearLayout>
 		</LinearLayout>
 
 	</LinearLayout>

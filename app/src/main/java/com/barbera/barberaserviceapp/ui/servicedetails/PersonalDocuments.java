@@ -79,7 +79,7 @@ public class PersonalDocuments extends AppCompatActivity {
             public void onClick(View v) {
                 String aad= aadhar.getText().toString();
                 String pn= pan.getText().toString();
-                if(aad.length()!=14){
+                if(aad.length()!=12){
                     Toast.makeText(getApplicationContext(),"Please enter valid aadhar card no.",Toast.LENGTH_SHORT).show();
                 }
                 else if(pn.length()!=10){
