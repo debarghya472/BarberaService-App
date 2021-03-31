@@ -54,8 +54,6 @@ public class VehicleDetails extends AppCompatActivity {
 
         if(license_no!=null){
             licNo.setText(license_no);
-            img4.setVisibility(View.VISIBLE);
-            img5.setVisibility(View.VISIBLE);
         }
 
         license.setOnClickListener(new View.OnClickListener() {
