@@ -80,7 +80,7 @@ public class VehicleDetails extends AppCompatActivity {
                 else if(!check4){
                     Toast.makeText(getApplicationContext(),"Please enter your Driving license photo",Toast.LENGTH_SHORT).show();
                 }
-                else if(lic.isEmpty()){
+                else if(lic.length()!=16){
                     Toast.makeText(getApplicationContext(),"Please enter your Driving license number",Toast.LENGTH_SHORT).show();
                 }
                 else{
