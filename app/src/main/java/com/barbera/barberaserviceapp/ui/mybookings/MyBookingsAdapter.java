@@ -62,7 +62,7 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         SharedPreferences sharedPreferences = context.getSharedPreferences("ServiceList",Context.MODE_PRIVATE);
         SharedPreferences sharedPreferences1 = context.getSharedPreferences("ServiceInfo",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor= sharedPreferences1.edit();
-        String services[] = bookingItem.getService().split(" ");
+        String services[] = bookingItem.getService().split(",");
         String Servicenames ="";
         for(int i=0;i<services.length;i++){
             Servicenames = Servicenames + sharedPreferences.getString(services[i],"")+",";
