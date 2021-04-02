@@ -22,6 +22,8 @@ import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.barbera.barberaserviceapp.ui.bookings.BookingItem;
 import com.barbera.barberaserviceapp.ui.service.ImageVerifyActivity;
 import com.barbera.barberaserviceapp.ui.service.ServiceActivity;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -96,6 +98,12 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
             context.startActivity(intent);
         });
 
+        holder.contact.setOnClickListener(v->{
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:"+bookingItem.getContact()));
+            context.startActivity(intent);
+        });
+
         holder.direction.setOnClickListener(v -> {
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                     Uri.parse("google.navigation:q="+bookingItem.getAddress()));
@@ -118,7 +126,9 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
 
         holder.cancel.setOnClickListener(v -> {
             int points = sharedPreferences1.getInt("points",0);
+            int cancel = sharedPreferences1.getInt("cancel",0);
             editor.putInt("points",points-20);
+            editor.putInt("cancel",cancel+1);
             editor.commit();
             bookingItemList.remove(position);
             notifyDataSetChanged();
@@ -135,7 +145,8 @@ public class MyBookingsAdapter extends RecyclerView.Adapter<MyBookingsAdapter.My
         progressDialog.setMessage("Cancelling Booking!!");
         progressDialog.show();
         progressDialog.setCancelable(true);
-        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",0,id,date,contact);
+        String unique=FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,unique,"update",0,id,date,contact);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
