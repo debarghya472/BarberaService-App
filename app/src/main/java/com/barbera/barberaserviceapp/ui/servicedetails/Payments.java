@@ -108,12 +108,9 @@ public class Payments extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"We are reviewing your response and will get back to you soon",Toast.LENGTH_LONG).show();
                                     Intent intent = new Intent(Payments.this, LoginActivity.class);
-                                    SharedPreferences sharedPreferences = getSharedPreferences("Details",MODE_PRIVATE);
-                                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                                    editor.putBoolean("details_conf",true);
-                                    editor.apply();
+
                                     startActivity(intent);
                                 }
                             });

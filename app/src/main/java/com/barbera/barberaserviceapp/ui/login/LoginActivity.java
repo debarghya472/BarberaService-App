@@ -73,11 +73,6 @@ public class LoginActivity extends AppCompatActivity {
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }
-        SharedPreferences sharedPreferences=getSharedPreferences("Details",MODE_PRIVATE);
-        Boolean confirmedDetails = sharedPreferences.getBoolean("details_conf",false);
-        if(!confirmedDetails){
-            sendToServiceDetails();
-        }
     }
 
     private boolean checkEmailAndPassword() {

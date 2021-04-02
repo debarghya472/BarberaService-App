@@ -9,6 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.barbera.barberaserviceapp.ui.CheckUser;
 import com.barbera.barberaserviceapp.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                 if(isLoggedIn()){
                     sendToMainActivity();
                 }else {
-                    sendToLoginActivity();
+                    sendToCheckUserActivity();
                 }
             }
         },3000);
@@ -43,8 +44,8 @@ public class SplashActivity extends AppCompatActivity {
         return false;
     }
 
-    private void sendToLoginActivity() {
-        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+    private void sendToCheckUserActivity() {
+        Intent intent = new Intent(SplashActivity.this, CheckUser.class);
         startActivity(intent);
     }
 
