@@ -26,6 +26,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
 
 import static com.barbera.barberaserviceapp.LiveLocationService.person;
@@ -93,8 +98,9 @@ public class ImageVerifyActivity extends AppCompatActivity {
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
 
+            Date date = new Date();
 
-            StorageReference ref = storageReference.child("servicemen/"+person);
+            StorageReference ref = storageReference.child("servicemen/"+person+date.toString());
 
             ref.putBytes(data)
                     .addOnSuccessListener(taskSnapshot -> {
