@@ -101,7 +101,7 @@ public class ProfileFragment extends Fragment {
                         name.setVisibility(View.VISIBLE);
                         email.setVisibility(View.VISIBLE);
                         phone.setVisibility(View.VISIBLE);
-                        earnings.setVisibility(View.VISIBLE);
+//                        earnings.setVisibility(View.VISIBLE);
                         points.setVisibility(View.VISIBLE);
                         trips.setVisibility(View.VISIBLE);
                         logout.setVisibility(View.VISIBLE);
@@ -113,7 +113,7 @@ public class ProfileFragment extends Fragment {
             name.setVisibility(View.VISIBLE);
             email.setVisibility(View.VISIBLE);
             phone.setVisibility(View.VISIBLE);
-            earnings.setVisibility(View.VISIBLE);
+//             
             points.setVisibility(View.VISIBLE);
             trips.setVisibility(View.VISIBLE);
             logout.setVisibility(View.VISIBLE);
