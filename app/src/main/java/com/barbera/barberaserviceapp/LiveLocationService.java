@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.os.IBinder;
 import android.os.Looper;
@@ -28,7 +29,7 @@ import static com.barbera.barberaserviceapp.ServiceApplication.pubnub;
 
 public class LiveLocationService extends Service {
     private FusedLocationProviderClient mFusedLocationClient;
-    public static final String person = "Service 1";
+    public static  String person;
 
     private LocationRequest locationRequest;
     @Nullable
@@ -48,6 +49,8 @@ public class LiveLocationService extends Service {
                 .setSmallIcon(R.drawable.ic_baseline_home_24)
                 .setContentIntent(pendingIntent)
                 .build();
+        SharedPreferences sharedPreferences = getSharedPreferences("ServiceChannel",MODE_PRIVATE);
+        person = sharedPreferences.getString("channel_name","");
         try {
             mFusedLocationClient.requestLocationUpdates(locationRequest, new LocationCallback() {
                 @Override
