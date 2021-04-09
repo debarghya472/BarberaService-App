@@ -50,7 +50,11 @@ public class LoginActivity extends AppCompatActivity {
                         .addOnCompleteListener(task -> {
                             if(task.isSuccessful()){
                                 progressDialog.dismiss();
-                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+//                                SharedPreferences preferences = getSharedPreferences("Login",MODE_PRIVATE);
+//                                SharedPreferences.Editor editor=preferences.edit();
+//                                editor.putBoolean("login",true);
+//                                editor.commit();
+//                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
                                 finish();
                             }
                             else{
@@ -70,9 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-        }
+
     }
 
     private boolean checkEmailAndPassword() {

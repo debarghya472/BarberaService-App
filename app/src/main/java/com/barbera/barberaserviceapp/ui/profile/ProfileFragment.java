@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class ProfileFragment extends Fragment {
     private TextView earnings;
     private TextView points;
     private  TextView trips;
+    private Button items;
     private CardView logout;
     private  CardView login;
     private int key =0;
@@ -57,11 +59,17 @@ public class ProfileFragment extends Fragment {
        trips =(TextView)view.findViewById(R.id.trip);
        logout=(CardView)view.findViewById(R.id.logout);
        login =(CardView)view.findViewById(R.id.login);
+       items = view.findViewById(R.id.items);
        sharedPreferences = getActivity().getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
 
        refresh.setOnClickListener(v -> {
            key =1;
            displayProfile();
+       });
+
+       items.setOnClickListener(v -> {
+           Intent intent = new Intent(getActivity(),ItemList.class);
+           startActivity(intent);
        });
 
        displayProfile();

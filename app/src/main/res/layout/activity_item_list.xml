@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.profile.ItemList">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:layout_margin="25dp"
+        android:textColor="@color/colorAccent"
+        android:textAllCaps="true"
+        android:text="List of items taken"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apron"
+            android:id="@+id/apronT"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/apron"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Carpet"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:id="@+id/carpetT"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/carpet"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Disposable"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/disposableT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:id="@+id/disposable"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mirror"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/mirrorT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/mirror"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Neck Tape"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/necktapeT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/necktape"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T-Shirt"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/tshirtT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/tshirt"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tissue"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/tissueT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tissue"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tripod"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/tripodT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/tripod"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="After Lotion"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:id="@+id/afterlotionT"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/afterlotion"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bag"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:id="@+id/bagT"
+            android:textAllCaps="true"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:id="@+id/bag"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cleansing Cream"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:id="@+id/cleansingcreamT"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:id="@+id/cleansingcream"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shaving Apron"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:id="@+id/shavingapronT"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:id="@+id/shavingapron"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shaving foam"
+            android:layout_margin="25dp"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:id="@+id/shavingfoamT"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:layout_margin="25dp"
+            android:id="@+id/shavingfoam"
+            android:textSize="20sp"
+            android:textColor="@color/colorAccent"
+            android:visibility="gone"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</LinearLayout>
+
+    </ScrollView>
+
