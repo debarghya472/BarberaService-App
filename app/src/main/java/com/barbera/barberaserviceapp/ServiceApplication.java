@@ -96,6 +96,8 @@ public class ServiceApplication extends Application {
         editor.putString("68","fruit facial + threading+ fruit bleach");
         editor.putString("69","oxy bleach+ hand wax+ diamond facial");
         editor.putString("70","gold facial+ milk hand wax+ full leg milk wax + threading");
+        editor.putString("71","Head Massage");
+        editor.putString("72","Hair color Application (Men)");
         editor.commit();
 
         createNotification();

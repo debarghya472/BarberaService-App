@@ -368,7 +368,7 @@ public class ServiceActivity extends AppCompatActivity {
     private void assignServiceTimer() {
         sharedPreferences1 = getSharedPreferences("Timer",MODE_PRIVATE);
         SharedPreferences.Editor editor1 = sharedPreferences1.edit();
-        editor1.putInt("1",1);
+        editor1.putInt("1",30);
         editor1.putInt("2",40);
         editor1.putInt("3",30);
         editor1.putInt("4",60);
@@ -438,6 +438,8 @@ public class ServiceActivity extends AppCompatActivity {
         editor1.putInt("68",90);
         editor1.putInt("69",120);
         editor1.putInt("70",130);
+        editor1.putInt("71",15);
+        editor1.putInt("72",40);
         editor1.commit();
 
     }
