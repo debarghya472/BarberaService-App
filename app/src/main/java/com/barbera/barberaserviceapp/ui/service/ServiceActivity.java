@@ -134,6 +134,8 @@ public class ServiceActivity extends AppCompatActivity {
                     startotp.setVisibility(View.INVISIBLE);
                     startOtpBtn.setVisibility(View.INVISIBLE);
                     timer.setVisibility(View.VISIBLE);
+                    endotp.setVisibility(View.VISIBLE);
+                    endOtpBtn.setVisibility(View.VISIBLE);
                     startTimer();
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong Otp!!", Toast.LENGTH_SHORT).show();
@@ -313,6 +315,7 @@ public class ServiceActivity extends AppCompatActivity {
                 user.put("earnings",e+"");
                 user.put("points",p+"");
                 user.put("trips",t+"");
+                user.put("timeTaken",TimeLeftInMil*1000+" sec");
                 FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .update(user).addOnCompleteListener(task1 -> {
 
