@@ -55,7 +55,7 @@ public class ItemList extends AppCompatActivity {
                 itm1=documentSnapshot.getString("Apron");
                 if(!itm1.equals("0")){
                     it1.setVisibility(View.VISIBLE);
-                    apron.setText(itm1);
+                    apron.setText("x"+itm1);
                     apron.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -65,7 +65,7 @@ public class ItemList extends AppCompatActivity {
                 itm13= documentSnapshot.getString("Carpet");
                 if(!itm13.equals("0")){
                     it13.setVisibility(View.VISIBLE);
-                    car.setText(itm13);
+                    car.setText("x"+itm13);
                     car.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -75,7 +75,7 @@ public class ItemList extends AppCompatActivity {
                 itm2= documentSnapshot.getString("Disposable");
                 if(!itm2.equals("0")){
                     it2.setVisibility(View.VISIBLE);
-                    disp.setText(itm2);
+                    disp.setText("x"+itm2);
                     disp.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -85,7 +85,7 @@ public class ItemList extends AppCompatActivity {
                 itm3= documentSnapshot.getString("Mirror");
                 if(!itm3.equals("0")){
                     it3.setVisibility(View.VISIBLE);
-                    mir.setText(itm3);
+                    mir.setText("x"+itm3);
                     mir.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -95,7 +95,7 @@ public class ItemList extends AppCompatActivity {
                 itm4= documentSnapshot.getString("Neck Tape");
                 if(!itm4.equals("0")){
                     it4.setVisibility(View.VISIBLE);
-                    neck.setText(itm4);
+                    neck.setText("x"+itm4);
                     neck.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -105,7 +105,7 @@ public class ItemList extends AppCompatActivity {
                 itm5= documentSnapshot.getString("T-shirt");
                 if(!itm5.equals("0")){
                     it5.setVisibility(View.VISIBLE);
-                    tsh.setText(itm5);
+                    tsh.setText("x"+itm5);
                     tsh.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -115,7 +115,7 @@ public class ItemList extends AppCompatActivity {
                 itm6= documentSnapshot.getString("Tissue");
                 if(!itm6.equals("0")){
                     it6.setVisibility(View.VISIBLE);
-                    tiss.setText(itm6);
+                    tiss.setText("x"+itm6);
                     tiss.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -125,7 +125,7 @@ public class ItemList extends AppCompatActivity {
                 itm7= documentSnapshot.getString("Tripod");
                 if(!itm7.equals("0")){
                     it7.setVisibility(View.VISIBLE);
-                    tri.setText(itm7);
+                    tri.setText("x"+itm7);
                     tri.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -135,7 +135,7 @@ public class ItemList extends AppCompatActivity {
                 itm8= documentSnapshot.getString("after lotion");
                 if(!itm8.equals("0")){
                     it8.setVisibility(View.VISIBLE);
-                    aflot.setText(itm8);
+                    aflot.setText("x"+itm8);
                     aflot.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -145,7 +145,7 @@ public class ItemList extends AppCompatActivity {
                 itm9= documentSnapshot.getString("bag");
                 if(!itm9.equals("0")){
                     it9.setVisibility(View.VISIBLE);
-                    bag.setText(itm9);
+                    bag.setText("x"+itm9);
                     bag.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -155,7 +155,7 @@ public class ItemList extends AppCompatActivity {
                 itm10= documentSnapshot.getString("cleansing cream");
                 if(!itm10.equals("0")){
                     it10.setVisibility(View.VISIBLE);
-                    clecre.setText(itm10);
+                    clecre.setText("x"+itm10);
                     clecre.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -165,7 +165,7 @@ public class ItemList extends AppCompatActivity {
                 itm11= documentSnapshot.getString("shaving apron");
                 if(!itm11.equals("0")){
                     it11.setVisibility(View.VISIBLE);
-                    shavapr.setText(itm11);
+                    shavapr.setText("x"+itm11);
                     shavapr.setVisibility(View.VISIBLE);
                 }
                 else{
@@ -175,7 +175,7 @@ public class ItemList extends AppCompatActivity {
                 itm12= documentSnapshot.getString("shaving foam");
                 if(!itm12.equals("0")){
                     it12.setVisibility(View.VISIBLE);
-                    shavfoa.setText(itm12);
+                    shavfoa.setText("x"+itm12);
                     shavfoa.setVisibility(View.VISIBLE);
                 }
                 else{
