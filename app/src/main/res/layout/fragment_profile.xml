@@ -117,40 +117,40 @@
 				android:textSize="20sp"
 				android:textColor="@color/colorAccent"/>
 	</LinearLayout>
-	<LinearLayout
-			android:id="@+id/about"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="horizontal"
-			android:layout_below="@id/trips"
-			android:foreground="?android:attr/selectableItemBackground"
-			android:clickable="true">
-		<TextView
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:text="Total Earnings: -"
-				android:textAllCaps="true"
-				android:layout_margin="25dp"
-				android:textSize="20sp"
-				android:textColor="@color/colorAccent"
-				android:textStyle="bold"/>
-		<TextView
-				android:id="@+id/earning"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginTop="25dp"
-				android:text="100"
-				android:visibility="invisible"
-				android:textStyle="bold"
-				android:textSize="20sp"
-				android:textColor="@color/colorAccent"/>
-	</LinearLayout>
+<!--	<LinearLayout-->
+<!--			android:id="@+id/about"-->
+<!--			android:layout_width="match_parent"-->
+<!--			android:layout_height="wrap_content"-->
+<!--			android:orientation="horizontal"-->
+<!--			android:layout_below="@id/trips"-->
+<!--			android:foreground="?android:attr/selectableItemBackground"-->
+<!--			android:clickable="true">-->
+<!--		<TextView-->
+<!--				android:layout_width="wrap_content"-->
+<!--				android:layout_height="wrap_content"-->
+<!--				android:text="Total Earnings: -"-->
+<!--				android:textAllCaps="true"-->
+<!--				android:layout_margin="25dp"-->
+<!--				android:textSize="20sp"-->
+<!--				android:textColor="@color/colorAccent"-->
+<!--				android:textStyle="bold"/>-->
+<!--		<TextView-->
+<!--				android:id="@+id/earning"-->
+<!--				android:layout_width="wrap_content"-->
+<!--				android:layout_height="wrap_content"-->
+<!--				android:layout_marginTop="25dp"-->
+<!--				android:text="100"-->
+<!--				android:visibility="invisible"-->
+<!--				android:textStyle="bold"-->
+<!--				android:textSize="20sp"-->
+<!--				android:textColor="@color/colorAccent"/>-->
+<!--	</LinearLayout>-->
 	<LinearLayout
 
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:orientation="horizontal"
-		android:layout_below="@id/about"
+		android:layout_below="@id/trips"
 		android:foreground="?android:attr/selectableItemBackground"
 		android:clickable="true">
 		<Button

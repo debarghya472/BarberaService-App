@@ -1,206 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		xmlns:tools="http://schemas.android.com/tools"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		tools:context=".ui.home.HomeFragment">
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".ui.home.HomeFragment">
 
 	<androidx.appcompat.widget.Toolbar
-			android:id="@+id/toolbar"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:background="@color/colorAccent"
-			android:minHeight="?attr/actionBarSize"
-			app:collapseIcon="@drawable/ic_baseline_home_24"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			app:title="Home"
-			app:titleMarginStart="24dp"
-			app:titleTextColor="@color/white"
-			tools:ignore="MissingConstraints" />
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/colorAccent"
+		android:minHeight="?attr/actionBarSize"
+		app:collapseIcon="@drawable/ic_baseline_home_24"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:title="Home"
+		app:titleMarginStart="24dp"
+		app:titleTextColor="@color/white"
+		tools:ignore="MissingConstraints" />
 
 	<RelativeLayout
-			android:id="@+id/relativeLayout2"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			tools:ignore="MissingConstraints">
+		android:id="@+id/relativeLayout2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		tools:ignore="MissingConstraints">
 
 		<ImageView
-				android:id="@+id/logo"
-				android:layout_width="180dp"
-				android:layout_height="180dp"
-				android:layout_centerHorizontal="true"
-				android:layout_marginTop="70dp"
-				android:src="@drawable/logo"
-				app:layout_constraintEnd_toEndOf="parent"
-				app:layout_constraintStart_toStartOf="parent"
-				app:layout_constraintTop_toTopOf="parent" />
+			android:id="@+id/logo"
+			android:layout_width="180dp"
+			android:layout_height="180dp"
+			android:layout_centerHorizontal="true"
+			android:layout_marginTop="70dp"
+			android:src="@drawable/logohome"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
 
 		<androidx.constraintlayout.widget.ConstraintLayout
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:layout_below="@id/logo">
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:layout_below="@id/logo">
 
 			<androidx.cardview.widget.CardView
-					android:id="@+id/one"
-					android:layout_width="170dp"
-					android:layout_height="wrap_content"
-					android:layout_margin="20dp"
-					android:layout_marginStart="8dp"
-					android:layout_marginTop="8dp"
-					android:layout_marginEnd="8dp"
-					android:backgroundTint="@color/colorAccent"
-					app:cardCornerRadius="16dp"
-					app:layout_constraintEnd_toStartOf="@+id/two"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="parent">
+				android:id="@+id/one"
+				android:layout_width="170dp"
+				android:layout_height="wrap_content"
+				android:layout_margin="20dp"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="8dp"
+				android:backgroundTint="@color/colorAccent"
+				app:cardCornerRadius="16dp"
+				app:layout_constraintEnd_toStartOf="@+id/two"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
 
 				<TextView
-						android:id="@+id/tripps"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:layout_gravity="center"
-						android:padding="32dp"
-						android:text="8934"
-						android:textColor="@color/white"
-						android:textSize="26dp" />
+					android:id="@+id/tripps"
+					android:layout_width="wrap_content"
+					android:layout_height="match_parent"
+					android:layout_gravity="center"
+					android:padding="32dp"
+					android:text="8934"
+					android:textColor="@color/white"
+					android:textSize="26dp" />
 
 			</androidx.cardview.widget.CardView>
 
 			<TextView
-					android:id="@+id/text1"
+				android:id="@+id/text1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/one"
+				android:layout_marginStart="32dp"
+				android:layout_marginTop="8dp"
+				android:text="Trips"
+				android:textColor="@color/colorAccent"
+				android:textSize="28dp"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/one" />
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/two"
+				android:layout_width="170dp"
+				android:layout_height="wrap_content"
+				android:layout_margin="20dp"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="8dp"
+				android:backgroundTint="@color/colorAccent"
+				app:cardCornerRadius="16dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent">
+
+				<TextView
+					android:id="@+id/holiday"
+					android:layout_width="wrap_content"
+					android:layout_height="115dp"
+					android:layout_gravity="center"
+					android:padding="32dp"
+					android:text="0"
+					android:textColor="@color/white"
+					android:textSize="26dp" />
+
+
+			</androidx.cardview.widget.CardView>
+
+			<TextView
+				android:id="@+id/textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/one"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="32dp"
+				android:text="Holidays"
+				android:textColor="@color/colorAccent"
+				android:textSize="28dp"
+				android:textStyle="bold"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@+id/one"
+				app:layout_constraintTop_toBottomOf="@+id/two" />
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/three"
+				android:layout_width="170dp"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="8dp"
+				android:layout_marginTop="24dp"
+				android:layout_marginEnd="8dp"
+				android:layout_toRightOf="@id/three"
+				android:backgroundTint="@color/colorAccent"
+				app:cardCornerRadius="16dp"
+				app:layout_constraintEnd_toStartOf="@+id/four"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/text1">
+
+				<TextView
+					android:id="@+id/cancelled"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_below="@+id/one"
-					android:layout_marginStart="32dp"
-					android:layout_marginTop="8dp"
-					android:text="Trips"
-					android:textColor="@color/colorAccent"
-					android:textSize="28dp"
-					android:textStyle="bold"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toBottomOf="@+id/one" />
-
-			<androidx.cardview.widget.CardView
-					android:id="@+id/two"
-					android:layout_width="170dp"
-					android:layout_height="wrap_content"
-					android:layout_margin="20dp"
-					android:layout_marginTop="8dp"
-					android:layout_marginEnd="8dp"
-					android:backgroundTint="@color/colorAccent"
-					app:cardCornerRadius="16dp"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintTop_toTopOf="parent">
-
-				<TextView
-						android:id="@+id/earning"
-						android:layout_width="wrap_content"
-						android:layout_height="match_parent"
-						android:layout_gravity="center"
-						android:padding="32dp"
-						android:text="Rs.1000"
-						android:textColor="@color/white"
-						android:textSize="26dp" />
-
+					android:layout_gravity="center"
+					android:padding="32dp"
+					android:text="0 "
+					android:textColor="@color/white"
+					android:textSize="32dp" />
 
 			</androidx.cardview.widget.CardView>
 
 			<TextView
-					android:id="@+id/textView"
+				android:id="@+id/text3"
+				android:layout_width="170dp"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/three"
+				android:layout_marginStart="32dp"
+				android:text="Cancelled Trips"
+				android:textColor="@color/colorAccent"
+				android:textSize="28dp"
+				android:textStyle="bold"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@+id/three" />
+
+			<androidx.cardview.widget.CardView
+				android:id="@+id/four"
+				android:layout_width="170dp"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="24dp"
+				android:layout_marginEnd="8dp"
+				android:layout_toRightOf="@id/three"
+				android:backgroundTint="@color/colorAccent"
+				app:cardCornerRadius="16dp"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@+id/text3"
+				app:layout_constraintTop_toBottomOf="@+id/textView">
+
+				<TextView
+					android:id="@+id/points"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_below="@+id/one"
-					android:layout_marginTop="8dp"
-					android:layout_marginEnd="32dp"
-					android:text="Earnings"
-					android:textColor="@color/colorAccent"
-					android:textSize="28dp"
-					android:textStyle="bold"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toEndOf="@+id/one"
-					app:layout_constraintTop_toBottomOf="@+id/two" />
-
-			<androidx.cardview.widget.CardView
-					android:id="@+id/three"
-					android:layout_width="170dp"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="8dp"
-					android:layout_marginTop="24dp"
-					android:layout_marginEnd="8dp"
-					android:layout_toRightOf="@id/three"
-					android:backgroundTint="@color/colorAccent"
-					app:cardCornerRadius="16dp"
-					app:layout_constraintEnd_toStartOf="@+id/four"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toBottomOf="@+id/text1">
-
-				<TextView
-						android:id="@+id/cancelled"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_gravity="center"
-						android:padding="32dp"
-						android:text="0 "
-						android:textColor="@color/white"
-						android:textSize="32dp" />
+					android:layout_centerInParent="true"
+					android:layout_gravity="center"
+					android:padding="32dp"
+					android:text="40"
+					android:textColor="@color/white"
+					android:textSize="32dp" />
 
 			</androidx.cardview.widget.CardView>
 
 			<TextView
-					android:id="@+id/text3"
-					android:layout_width="170dp"
-					android:layout_height="wrap_content"
-					android:layout_below="@+id/three"
-					android:layout_marginStart="32dp"
-					android:text="Cancelled Trips"
-					android:textColor="@color/colorAccent"
-					android:textSize="28dp"
-					android:textStyle="bold"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toBottomOf="@+id/three" />
-
-			<androidx.cardview.widget.CardView
-					android:id="@+id/four"
-					android:layout_width="170dp"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="24dp"
-					android:layout_marginEnd="8dp"
-					android:layout_toRightOf="@id/three"
-					android:backgroundTint="@color/colorAccent"
-					app:cardCornerRadius="16dp"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toEndOf="@+id/text3"
-					app:layout_constraintTop_toBottomOf="@+id/textView">
-
-				<TextView
-						android:id="@+id/points"
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_centerInParent="true"
-						android:layout_gravity="center"
-						android:padding="32dp"
-						android:text="40"
-						android:textColor="@color/white"
-						android:textSize="32dp" />
-
-			</androidx.cardview.widget.CardView>
-
-			<TextView
-					android:id="@+id/text4"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_below="@+id/four"
-					android:layout_marginTop="8dp"
-					android:layout_marginEnd="32dp"
-					android:text="Points"
-					android:textColor="@color/colorAccent"
-					android:textSize="28dp"
-					android:textStyle="bold"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toEndOf="@+id/three"
-					app:layout_constraintTop_toBottomOf="@+id/four" />
+				android:id="@+id/text4"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_below="@+id/four"
+				android:layout_marginTop="8dp"
+				android:layout_marginEnd="32dp"
+				android:text="Points"
+				android:textColor="@color/colorAccent"
+				android:textSize="28dp"
+				android:textStyle="bold"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@+id/three"
+				app:layout_constraintTop_toBottomOf="@+id/four" />
 
 
 		</androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,24 +208,24 @@
 	</RelativeLayout>
 
 	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Live Location"
-			android:textStyle="bold"
-			android:textColor="@color/colorAccent"
-			app:layout_constraintBottom_toTopOf="@+id/switchs"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent" />
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Live Location"
+		android:textStyle="bold"
+		android:textColor="@color/colorAccent"
+		app:layout_constraintBottom_toTopOf="@+id/switchs"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent" />
 
 	<androidx.appcompat.widget.SwitchCompat
-			android:id="@+id/switchs"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_marginBottom="16dp"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toStartOf="parent"
-			tools:ignore="UseSwitchCompatOrMaterialXml" />
+		android:id="@+id/switchs"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="16dp"
+		app:layout_constraintBottom_toBottomOf="parent"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

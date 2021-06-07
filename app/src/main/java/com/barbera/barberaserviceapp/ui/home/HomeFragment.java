@@ -24,6 +24,12 @@ import androidx.fragment.app.Fragment;
 
 import com.barbera.barberaserviceapp.LiveLocationService;
 import com.barbera.barberaserviceapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 import java.util.Objects;
 
@@ -32,7 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class HomeFragment extends Fragment {
 
     private TextView trips;
-    private TextView earnings;
+    private TextView holidays;
     private  TextView cancelled;
     private TextView points;
     private SharedPreferences sharedPreferences;
@@ -55,19 +61,26 @@ public class HomeFragment extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         trips= view.findViewById(R.id.tripps);
-        earnings = view.findViewById(R.id.earning);
+        //earnings = view.findViewById(R.id.earning);
         cancelled = view.findViewById(R.id.cancelled);
         points = view.findViewById(R.id.points);
         switchCompat = view.findViewById(R.id.switchs);
+        holidays=view.findViewById(R.id.holiday);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if(sharedPreferences.getBoolean("ischecked",false)){
             startFS();
             switchCompat.setChecked(true);
         }
-
+        FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        holidays.setText(task.getResult().get("holidays").toString());
+                    }
+                });
         trips.setText(sharedPreferences.getInt("trips",0)+"");
-        earnings.setText("Rs. "+sharedPreferences.getInt("payment",0));
+        //earnings.setText("Rs. "+sharedPreferences.getInt("payment",0));
         cancelled.setText(sharedPreferences.getInt("cancel",0)+"");
         points.setText(sharedPreferences.getInt("points",0)+"");
 
