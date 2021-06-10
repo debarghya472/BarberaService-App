@@ -97,7 +97,7 @@
 				<TextView
 					android:id="@+id/holiday"
 					android:layout_width="wrap_content"
-					android:layout_height="115dp"
+					android:layout_height="match_parent"
 					android:layout_gravity="center"
 					android:padding="32dp"
 					android:text="0"
