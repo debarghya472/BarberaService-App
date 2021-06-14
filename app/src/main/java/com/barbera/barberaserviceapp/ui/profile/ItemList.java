@@ -36,7 +36,6 @@ public class ItemList extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new ItemListAdapter(itemModelList, getApplicationContext(), getSupportFragmentManager());
 
-
         FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Item")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -47,11 +46,12 @@ public class ItemList extends AppCompatActivity {
                                 documentSnapshot.get("Mirror").toString(), documentSnapshot.get("Neck Tape").toString(), documentSnapshot.get("T-shirt").toString(),
                                 documentSnapshot.get("Tissue").toString(), documentSnapshot.get("Tripod").toString(), documentSnapshot.get("after lotion").toString(),
                                 documentSnapshot.get("bag").toString(), documentSnapshot.get("cleansing cream").toString(), documentSnapshot.get("shaving apron").toString(),
-                                documentSnapshot.get("shaving foam").toString(),documentSnapshot.get("date").toString(),documentSnapshot.getId()));
+                                documentSnapshot.get("shaving foam").toString(),documentSnapshot.get("date").toString(),documentSnapshot.getId(),documentSnapshot.get("Seen").toString()));
                     }
                     recyclerView.setAdapter(adapter);
                 }
             }
                 });
+
     }
 }

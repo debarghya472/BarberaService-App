@@ -1,6 +1,7 @@
 package com.barbera.barberaserviceapp.ui.profile;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,36 +63,39 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
         holder.shavfoa.setText(itemModel.getShavfoa());
         holder.date.setText(itemModel.getDate());
         holder.docID = itemModel.getDocId();
+        holder.seen=itemModel.getSeen();
 
-        if (holder.ok.isEnabled()) {
-            holder.ok.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Map<String, Object> mp = new HashMap<>();
-                    mp.put("Seen", "Yes");
-                    FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .collection("Item").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+        if(holder.seen.equals("Yes")){
+            holder.ok.setVisibility(View.GONE);
+        }
+        holder.ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.ok.setVisibility(View.GONE);
+                FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Item")
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                                if (documentSnapshot.getId().equals(holder.docID)) {
-                                    //Toast.makeText(context,documentSnapshot.getId(),Toast.LENGTH_SHORT).show();
-                                    FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .collection("Item").document(documentSnapshot.getId()).update(mp)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    holder.ok.setEnabled(false);
-                                                    //Toast.makeText(context,"Ha",Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
+                                if(documentSnapshot.getId().equals(holder.docID)){
+                                    Map<String,Object> mp=new HashMap<>();
+                                    mp.put("Seen","Yes");
+                                    FirebaseFirestore.getInstance().collection("Service").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).collection("Item")
+                                            .document(documentSnapshot.getId()).update(mp).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                        }
+                                    });
                                 }
+
                             }
                         }
-                    });
-                }
-            });
-        }
+                    }
+                });
+            }
+        });
     }
 
 
@@ -102,7 +106,7 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListAdapter.ItemVi
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
         private TextView apron,car,disp,mir,neck,tsh,tiss,tri,aflot,bag,clecre,shavapr,shavfoa,date;
         private Button ok;
-        private String docID;
+        private String docID,seen;
         public ItemViewHolder(@NonNull View itemView){
             super(itemView);
             apron=itemView.findViewById(R.id.apron);

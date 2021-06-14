@@ -1,13 +1,7 @@
 package com.barbera.barberaserviceapp.ui.service;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -16,8 +10,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import com.barbera.barberaserviceapp.R;
 import com.barbera.barberaserviceapp.network.JsonPlaceHolderApi;
+import com.barbera.barberaserviceapp.network.RCI_otp;
 import com.barbera.barberaserviceapp.network.RetrofitClientInstance;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +25,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -52,6 +55,7 @@ public class ServiceActivity extends AppCompatActivity {
     private String contact;
     private TextView timer;
     private String[] ch;
+    private String startdt,enddt,starttime,endtime;
     private FirebaseFirestore firestore;
 
     private CountDownTimer countDownTimer;
@@ -136,6 +140,13 @@ public class ServiceActivity extends AppCompatActivity {
                     timer.setVisibility(View.VISIBLE);
                     endotp.setVisibility(View.VISIBLE);
                     endOtpBtn.setVisibility(View.VISIBLE);
+                    Date today = new Date();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+                    startdt = format.format(today);
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                    starttime=mdformat.format(calendar.getTime());
+                    Toast.makeText(getApplicationContext(),startdt+""+starttime,Toast.LENGTH_SHORT).show();
                     startTimer();
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong Otp!!", Toast.LENGTH_SHORT).show();
@@ -167,7 +178,34 @@ public class ServiceActivity extends AppCompatActivity {
             String otp2 = endotp.getText().toString();
             if (end != null) {
                 if (otp2.equals(end)) {
+                    Date today = new Date();
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+                    enddt = format.format(today);
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                    endtime=mdformat.format(calendar.getTime());
                     endotp.getText().clear();
+                    Toast.makeText(getApplicationContext(),enddt+""+endtime,Toast.LENGTH_SHORT).show();
+                    Retrofit retrofit= RCI_otp.getRetrofiInstance();
+                    JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+                    ServiceItem serviceItem=new ServiceItem(FirebaseAuth.getInstance().getUid(),startdt,enddt,"0",date,service);
+                    Call<ServiceItem> call= jsonPlaceHolderApi.updateService(serviceItem);
+                    call.enqueue(new Callback<ServiceItem>() {
+                        @Override
+                        public void onResponse(Call<ServiceItem> call, Response<ServiceItem> response) {
+                            if(response.code()==200){
+                                //Toast.makeText("")
+                            }
+                            else{
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ServiceItem> call, Throwable t) {
+
+                        }
+                    });
                     showpayment();
                 } else {
                     Toast.makeText(getApplicationContext(), "Wrong Otp!!", Toast.LENGTH_SHORT).show();
@@ -190,7 +228,6 @@ public class ServiceActivity extends AppCompatActivity {
             }
         });
         calculateTime();
-
     }
 
     @Override
@@ -346,7 +383,7 @@ public class ServiceActivity extends AppCompatActivity {
         progressDialog.setMessage("Ending Service Please wait ....!!");
         progressDialog.show();
         progressDialog.setCancelable(true);
-        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"debarghya","update",2,id,date,contact);
+        Call<String> call = jsonPlaceHolderApi.updateAssignee(name,service,time,address,amount,"done","update",2,id,date,contact);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
